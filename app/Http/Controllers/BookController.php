@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Book;
 
 class BookController extends Controller
@@ -10,6 +9,12 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
-        return view('books.show', compact('book'));
+        $copiesAvailable = 2;
+        $isAvailable = true;
+        if ($copiesAvailable == 0) {
+            $isAvailable = false;
+        }
+        $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
+        return view('books.show', compact(['book', 'isAvailable', 'availabilityMessage']));
     }
 }
