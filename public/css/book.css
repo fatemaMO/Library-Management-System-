@@ -1,6 +1,80 @@
-.bookDescription{
-    color: red
+.bookDescription {
+    color: red;
 }
-.bookCover{
+.bookCover {
     /* width: 100% */
+}
+
+.rate-area {
+    float: left;
+    border-style: none;
+}
+
+.rate-area:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.rate-area:not(:checked) > label {
+    float: right;
+    width: 1em;
+    padding: 0 0.1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 220%;
+    line-height: 1.2;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+
+.rate-area:not(:checked) > label:before {
+    content: "★ ";
+}
+
+.rate-area > input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+    font-size: 220% !important;
+}
+
+.rate-area:not(:checked) > label:hover,
+.rate-area:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+
+.rate-area > input:checked + label:hover,
+.rate-area > input:checked + label:hover ~ label,
+.rate-area > input:checked ~ label:hover,
+.rate-area > input:checked ~ label:hover ~ label,
+.rate-area > label:hover ~ input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px goldenrod;
+}
+
+.rate-area > label:active {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+#comment{
+  color:  rgba(255, 255, 255, 0.815) 
+}
+.btn:hover {
+  background-color: rgba(112, 146, 240, 0.815) !important;
+}
+
+.star{
+  font-size: 20px
+}
+
+input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]), input[type="url"]:not(.browser-default):focus:not([readonly]), input[type="time"]:not(.browser-default):focus:not([readonly]), input[type="date"]:not(.browser-default):focus:not([readonly]), input[type="datetime"]:not(.browser-default):focus:not([readonly]), input[type="datetime-local"]:not(.browser-default):focus:not([readonly]), input[type="tel"]:not(.browser-default):focus:not([readonly]), input[type="number"]:not(.browser-default):focus:not([readonly]), input[type="search"]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid rgb(83, 81, 209);
+    -webkit-box-shadow: 0 1px 0 0 black;
+    box-shadow: 0 1px 0 0 rgb(83, 81, 209);
+}
+
+.active{
+    color : rgb(34, 32, 156) !important
 }

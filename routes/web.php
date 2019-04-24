@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('books', 'BookController');
+Route::resource('comments', 'CommentController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
