@@ -78,3 +78,12 @@ input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default
 .active{
     color : rgb(34, 32, 156) !important
 }
+
+/* errors */
+.error{
+    padding: 10px;
+    width: 70%;
+    margin:auto;
+    border: rgb(138, 32, 32) solid 1px;
+    border-radius: 10px;
+}

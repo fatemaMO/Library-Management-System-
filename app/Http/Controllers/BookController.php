@@ -3,24 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Comment;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     public function show($id)
     {
+        $userid = 1;
+        // get the book
         $book = Book::find($id);
-
-        $copiesAvailable = 0;
+        // get available copies
+        $copiesAvailable = $book->available_copies_no;
         $isAvailable = true;
-        $canComment = true;
         if ($copiesAvailable == 0) {
             $isAvailable = false;
         }
-        $comments = [['name' => 'Motaz', 'dicription' => 'this is a very good book', 'rate' => 5],
-            ['name' => 'Mohammed', 'dicription' => 'this is a very bad book', 'rate' => 1],
-        ];
+        // check if he can rate and comment
+        $canComment = Comment::canComment($id,$userid);
+        // get the comments
+        $comments = Comment::getComments($id);
+        $relatedBooks = Book::getRelatedBooks($book->category_id);
         $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
-        return view('books.show', compact(['canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage']));
+
+        return view('books.show', compact(['oldComment','relatedBooks','canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage']));
     }
 
     public function index()
