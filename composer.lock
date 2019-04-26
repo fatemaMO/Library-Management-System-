@@ -34,16 +34,6 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "\\Actuallymab\\LaravelComment\\LaravelCommentServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Actuallymab\\LaravelComment\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

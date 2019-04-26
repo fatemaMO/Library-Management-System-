@@ -20,17 +20,16 @@ class BookController extends Controller
             $isAvailable = false;
         }
         // check if he can rate and comment
-        $canComment = Comment::canComment($id,$userid);
+        $canComment = Comment::canComment($id, $userid);
         // get the comments
         $comments = Comment::getComments($id);
         $relatedBooks = Book::getRelatedBooks($book->category_id);
         $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
-
-        return view('books.show', compact(['oldComment','relatedBooks','canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage']));
+        $avgRate = Comment::getAvgRate($id);
+        $numberOfRates = Comment::getNumberOfRates($id);
+        return view('books.show', compact(['avgRate', 'oldComment', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage' , 'numberOfRates']));
     }
 
     public function index()
-    {
-
-    }
+    { }
 }
