@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Role;
+use App\Http\Controllers\Controller;
 
-class RolesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('admin.roles.index', ['roles' => $roles]); 
- 
+        //
     }
 
     /**
@@ -26,8 +24,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create'); 
-
+        //
     }
 
     /**
@@ -49,9 +46,7 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        $role = Role::find($id);
-        return view('admin.roles.show', ['role' => $role]); 
-
+        //
     }
 
     /**
@@ -62,9 +57,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        return view('admin.roles.edit', ['role' => $role]); 
-
+        //
     }
 
     /**

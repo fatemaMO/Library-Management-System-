@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Authentication Routes...
+// Authentication Routes..
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -25,25 +26,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::resources([
-        'roles' => 'RolesController',
+        'roles' => 'Admin\RolesController',
+        'categories' => 'CategoryController',
+
     
     ]);
 });
-
-Route::resource(['books'     => 'BookController',
-                'comments'   => 'CommentController',
-                'categories' => 'CategoryController'
-                
+Auth::routes();
+Route::resources(['books'     => 'BookController',
+                'comments'   => 'CommentController',  
             ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::resource();
 
