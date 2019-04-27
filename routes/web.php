@@ -36,5 +36,14 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 });
 
+Route::resource(['books'     => 'BookController',
+                'comments'   => 'CommentController',
+                'categories' => 'CategoryController'
+                
+            ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::resource();
+
