@@ -25,7 +25,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', function () {
     return view('welcome');
 });
-
+// user book controller
+Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+Route::resource('comments', 'CommentController');
+// admin books controller
+Route::resource('admin/books', 'Admin\BooksController');
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -38,10 +42,8 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     ]);
 });
 Auth::routes();
-Route::resources(['books'     => 'BookController',
-                'comments'   => 'CommentController',  
-            ]);
 
+ 
 Route::get('/home', 'HomeController@index')->name('home');
 
 

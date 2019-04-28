@@ -1,12 +1,12 @@
 <?php
+namespace App\Http\Controllers\User;
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Book;
 use App\Comment;
+use Illuminate\Support\Facades\DB;
 
-class BookController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
+        // !this will be the actual userId
         $userid = 1;
         // get the book
         $book = Book::find($id);
@@ -32,7 +33,7 @@ class BookController extends Controller
         $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
         $avgRate = Comment::getAvgRate($id);
         $numberOfRates = Comment::getNumberOfRates($id);
-        return view('books.show', compact(['avgRate', 'oldComment', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage' , 'numberOfRates']));
+        return view('books.show', compact(['avgRate', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage', 'numberOfRates']));
     }
 
     public function index()
