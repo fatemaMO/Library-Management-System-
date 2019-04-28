@@ -21,7 +21,12 @@
                         <div class="jquery-accordion-menu-header active"> Categories </div>
                         <ul>
                         @forelse ($bookCategories as $bookCategory)
-                        <li class="captalize" ><a href="#"> {{$bookCategory->name}}</a></li>
+                        @if($active == $bookCategory->id)
+                            <li class="captalize active" >
+                        @else
+                            <li class="captalize " >
+                        @endif
+                        <a href="<?php echo route('getBooks', ['id' => $bookCategory->id])?>"> {{$bookCategory->name}}</a></li>
                         @empty
                         <li> No Categories </li>
                         @endforelse

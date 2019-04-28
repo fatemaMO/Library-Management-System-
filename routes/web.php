@@ -26,24 +26,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// user book controller
+Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+Route::resource('comments', 'CommentController');
+// admin books controller
+Route::resource('admin/books', 'Admin\BooksController');
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
     Route::resources([
         'roles' => 'Admin\RolesController',
-        'categories' => 'CategoryController',
-
-    
+        'categories' => 'CategoryController',   
     ]);
 });
 Auth::routes();
 Route::resources(['books'     => 'BookController',
                 'comments'   => 'CommentController',  
             ]);
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/webBooks','BookController@webBooks');
+Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
+
 
 
