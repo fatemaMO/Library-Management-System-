@@ -13,7 +13,7 @@ class Book extends Model
             ->get();
         return $relatedBooks;
     }
-    protected $fillable = ['title', 'description', 'image','auther','lease_fees','total_copies_no','category_id'];
+    protected $fillable = ['title', 'description', 'image','auther','lease_fees','total_copies_no','available_copies_no','category_id'];
 }
 
 
