@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Category;
 
+use App\Book;
 
 class BookController extends Controller
 {
@@ -107,6 +108,7 @@ class BookController extends Controller
     public function webBooks ()
     {
         $bookCategories = Category::all();
-        return view('books.webBooks', compact('bookCategories'));
+        $books = Book::orderBy('id', 'desc')->paginate(3);
+        return view('books.webBooks', compact('bookCategories','books'));
     }
 }
