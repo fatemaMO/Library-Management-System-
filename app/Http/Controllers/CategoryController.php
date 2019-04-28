@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+
+
+
+
+
 class CategoryController extends Controller
 {
     /**
@@ -50,7 +55,7 @@ class CategoryController extends Controller
         ]);
         $category = Category::create($validatedData);
    
-        return redirect('/categories')->with('success', 'Category is successfully saved');
+        return redirect('/admin/categories')->with('success', 'Category is successfully saved');
     }
 
     /**
@@ -95,7 +100,7 @@ class CategoryController extends Controller
         ]);
         Category::whereId($id)->update($validatedData);
 
-        return redirect('/categories')->with('success', 'Category is successfully updated');
+        return redirect('/admin/categories')->with('success', 'Category is successfully updated');
     }
 
     /**
@@ -110,6 +115,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return  redirect('/categories')->with('success', 'Category is successfully deleted');
+        return  redirect('/admin/categories')->with('success', 'Category is successfully deleted');
     }
 }

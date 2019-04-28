@@ -1,48 +1,10 @@
+@extends('layouts.adminNav')
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <!-- CSRF Token -->
-    <title>library</title>
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-       <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
- <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color"> 
-    <nav class="navbar navbar-expand-sm bg-primary navbar-light">
-        <!-- <img src="../../"  alt="Smiley face" height="55" width="60"> -->
-        <div class="text">
-        <ul class="navbar-nav ">
-            <li class="navbar-brand">
-                <a class="nav-link" href="/users" style="Color:#FFF">User</a>
-            </li>
-            <li class="navbar-brand">
-                <a class="nav-link" href="/mangers" style="Color:#FFF">Mangers</a>
-            </li>
-            <li class="navbar-brand">
-                <a class="nav-link" href="/books" style="Color:#FFF">Books</a>
-            </li>
-            <li class="navbar-brand">
-                <a class="nav-link" href="/catgories" style="Color:#FFF">Catgories</a>
-            </li>
-            <li class="navbar-brand">
-                <a class="nav-link" href="#" style="Color:#FFF">Display Profit</a>
-            </li>
-        </ul>
-    </div>
-    </nav>
-    </div>
-    <div class="container">
+@section('content')
+<div class="top">
 <div class="card uper">
-  <div class="card-header">
-    Add Category
+  <div class="card-header ">
+  <h1>Add Category</h1>  
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -61,21 +23,18 @@
               <label for="name">Category Name:</label>
               <input type="text" class="form-control" name="name"/>
           </div>
-          <div class="form-group">
-              <label for="price">Category Description :</label>
-              <input type="text" class="form-control" name="discription"/>
-          </div>
+          <div class="form-group shadow-textarea">
+  <label for="exampleFormControlTextarea4">Category discription</label>
+  <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" class="form-control" name="discription"></textarea>
+</div>
          
-          <button type="submit" class="btn btn-primary-outline">Create Category</button>
+          <button type="submit" class="btn btn-success">Create Category</button>
       </form>
   </div>
-</div>
-</div>
   
-
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+<div class="right">
+      <button  class="btn btn-warning"> <a  href="/admin/categories">Back</a></button>
+  </div>
+</div>
+@endsection
