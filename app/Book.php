@@ -14,4 +14,13 @@ class Book extends Model
             ->get();
         return $relatedBooks;
     }
+
+    //aml 
+    public function user(){ 
+        return $this->belongsTo('App\User');
+    }
+
+    public function favourites(){
+        return $this->hasMany('App\Favourite');
+    }
 }

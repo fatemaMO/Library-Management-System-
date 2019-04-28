@@ -25,6 +25,8 @@
                 <h3 class="bookTitle">{{ $book->title }}</h3>
                 <div class="stage float-right">
                     <div class="heart"></div>
+                    <a href="#" class="like">Like</a>
+                    <a href="#" class="like">Dislike</a>
                 </div>
                 @if ($numberOfRates > 0)
                 <h4>Average rating : </h4>
@@ -164,6 +166,11 @@
             $(this).toggleClass("is-active");
         });
     });
+
+    $('.like').on('click',function(event){
+    console.log(event);
+    });
+    
     </script>
 
 </body>
