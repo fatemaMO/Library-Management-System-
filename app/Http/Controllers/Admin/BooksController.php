@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Book;
 use App\Category;
 use App\Comment;
@@ -11,7 +12,9 @@ class BooksController extends Controller
 {
     public function index()
     {
-        //
+        $books = Book::all();
+     return view('books.index', compact('books'))->with('books', $books);
+        
     }
 
     /**
@@ -28,7 +31,7 @@ class BooksController extends Controller
         //
         $categories = Category::all();
         
-        return view('books.create')->with('categories', $categories);
+        return view('books.create',compact('categorie '))->with('categories', $categories);
     }
 
     /**
@@ -50,8 +53,8 @@ class BooksController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $image =$request->file('image');
-        $new_name = rand().'.'.$image->getClientOrginalExtension;
-        $image->move(public_path('image'),new_name);
+        $new_name = rand().'.'.$image->getClientOriginalExtension();;
+        $image->move(public_path('image'),$new_name);
         $form_data=array(
             'title' => $request->title,
             'description' => $request->description,
@@ -83,7 +86,10 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+    $book = Book::findOrFail($id);
+
+    return view('books.edit', compact('book'));
     }
 
     /**
@@ -106,6 +112,9 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return redirect('/books')->with('success', 'Book is successfully deleted');
     }
 }

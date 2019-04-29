@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-    <a class="btn btn-primary" style="margin: 19px;" href="{{ route('categories.create')}}" class="btn btn-default">New contact</a>
+    <a class="btn btn-primary" style="margin: 19px;" href="{{ route('categories.create')}}" class="btn btn-default">New category</a>
     </div>
     <div class="uper">
   @if(session()->get('success'))
