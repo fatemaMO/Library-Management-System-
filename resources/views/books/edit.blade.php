@@ -16,7 +16,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('books.update', $book->id) }}">
+      <form method="post" action="{{ route('books.update', $book->id) }}" enctype="multipart/form-data">
           <div class="form-group">
               @csrf
               @method('PATCH')

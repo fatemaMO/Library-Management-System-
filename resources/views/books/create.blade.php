@@ -6,12 +6,12 @@
     margin-top: 40px;
   }
 </style>
- 
+
 <div class="card uper">
   <div class="card-header">
-   <h1> Add Book</h1> 
+   <h1> Add Book</h1>
   </div>
- 
+
   <div class="card-body">
     @if ($errors->any())
       <div class="alert alert-danger">
@@ -49,10 +49,10 @@
               <label for="available_copies_no">number of  copy:</label>
               <input type="number" class="form-control" name="available_copies_no"/>
           </div>
-          <select class="browser-default custom-select">
-          @foreach($categories as $category)
+          <select class="browser-default custom-select" name="category_id">
+            @foreach($categories as $category)
                 <option selected>Category</option>
-                    <option value="{{$category->id}}">{{$category->name}}</option>           
+                    <option value="{{$category->id}}">{{$category->name}}</option>
         </select>
         @endforeach
         <div class="col-md-6">
@@ -61,7 +61,7 @@
         </div>
           <button type="submit" class="btn btn-success">Create Book</button>
       </form>
- 
+
 
 </div>
 <div class="right">

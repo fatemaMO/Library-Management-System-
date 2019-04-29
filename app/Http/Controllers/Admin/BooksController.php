@@ -14,7 +14,7 @@ class BooksController extends Controller
     {
         $books = Book::all();
      return view('books.index', compact('books'))->with('books', $books);
-        
+
     }
 
     /**
@@ -26,12 +26,16 @@ class BooksController extends Controller
     {
         //
     }
+    // public function list(){
+    //     $categories=Category::all();
+
+    // }
     public function create()
     {
         //
-        $categories = Category::all();
-        
-        return view('books.create',compact('categorie '))->with('categories', $categories);
+        $categories=Category::all();
+
+        return view('books.create',compact('categories'));
     }
 
     /**
@@ -42,6 +46,7 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
@@ -55,6 +60,7 @@ class BooksController extends Controller
         $image =$request->file('image');
         $new_name = rand().'.'.$image->getClientOriginalExtension();;
         $image->move(public_path('image'),$new_name);
+
         $form_data=array(
             'title' => $request->title,
             'description' => $request->description,
@@ -63,11 +69,12 @@ class BooksController extends Controller
             'total_copies_no' => $request->total_copies_no,
             'available_copies_no' => $request->available_copies_no,
             'category_id' => $request->category_id,
-            'image' =>  $new_name 
+
+           'image' =>  $new_name
 
         );
         $book = Book::create($form_data);
-   
+
         return redirect('/admin/books')->with('success', 'Book is successfully saved');
     }
 
@@ -86,7 +93,7 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        
+
     $book = Book::findOrFail($id);
 
     return view('books.edit', compact('book'));
@@ -115,6 +122,8 @@ class BooksController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect('/books')->with('success', 'Book is successfully deleted');
+        return redirect('admin/books')->with('success', 'Book is successfully deleted');
     }
+
+
 }

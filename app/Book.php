@@ -13,7 +13,14 @@ class Book extends Model
             ->get();
         return $relatedBooks;
     }
+    protected $attributes = [
+        'rate' => 0,
+     ];
     protected $fillable = ['title', 'description', 'image','auther','lease_fees','total_copies_no','available_copies_no','category_id'];
-}
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }}
 
 
