@@ -31,8 +31,8 @@
                 <h3 class="bookTitle">{{ $book->title }}</h3>
                 <div class="stage float-right">
                     <div class="heart"></div>
-                    <a href="#" class="like">Like</a>
-                    <a href="#" class="like">Dislike</a>
+                    <a href="#" class="like">favorite</a>
+                    <a href="#" class="like">unfavorite</a>
                 </div>
                 @if ($numberOfRates > 0)
                 <h4>Average rating : </h4>
@@ -191,7 +191,8 @@
      })
          .done(function(){
              
-         });
+
+            });
  });
 
     </script>

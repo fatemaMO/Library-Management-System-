@@ -21,6 +21,9 @@ Route::post('/like', [
     'uses' => 'BookController@bookLikeBook',
     'as' => 'like'
 ]);
+
+Route::get("favorite","FavoriteViewController@index");
+
 Route::resource('comments', 'CommentController');
 
 Auth::routes();

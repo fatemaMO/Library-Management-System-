@@ -115,4 +115,3 @@ input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default
   .stage {
             transform: translate(-50%, -50%);
   }
-  
