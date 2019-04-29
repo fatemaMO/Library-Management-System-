@@ -25,6 +25,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/', function () {
     return view('welcome');
 });
+
 // user book controller
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
 Route::resource('comments', 'User\CommentController');
@@ -42,8 +43,13 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     ]);
 });
 Auth::routes();
-
-
+Route::resources(['books'     => 'BookController',
+                'comments'   => 'CommentController',
+            ]);
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/webBooks','BookController@webBooks');
+Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
+Route::post('bookSearch','BookController@search')->name('bookSearch');
+
 
 

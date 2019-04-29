@@ -31,13 +31,14 @@
 </div>
 
           <button type="submit" class="btn btn-success">Update Book</button>
+          <div class="right">
+            <button  class="btn btn-warning"> <a  href="/admin/categories">Back</a></button>
+        </div>
       </form>
 
   </div>
 
   </div>
-  <div class="right">
-      <button  class="btn btn-warning"> <a  href="/admin/categories">Back</a></button>
-  </div>
+
 
   @endsection
