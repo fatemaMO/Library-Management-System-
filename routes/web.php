@@ -30,14 +30,16 @@ Route::get('/', function () {
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
 Route::resource('comments', 'CommentController');
 // admin books controller
-Route::resource('admin/books', 'Admin\BooksController');
+
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
     Route::resources([
         'roles' => 'Admin\RolesController',
-        'categories' => 'CategoryController',   
+        'categories' => 'Admin\CategoryController',
+        'books'=>'Admin\BooksController'
+    
     ]);
 });
 Auth::routes();
