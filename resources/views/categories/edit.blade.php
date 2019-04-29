@@ -17,22 +17,22 @@
       </div><br />
     @endif
       <form method="post" action="{{ route('categories.update', $category->id) }}">
-          
+
       <div class="form-group purple-border">
               @csrf
               @method('PATCH')
               <label for="name">Category Name:</label>
               <input type="text" class="form-control" name="name" value="{{$category->name}}"/>
           </div>
-    
+
           <div class="form-group shadow-textarea">
   <label for="exampleFormControlTextarea4">Category discription</label>
   <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" class="form-control" name="discription" value="{{$category->discription}}"></textarea>
 </div>
-        
+
           <button type="submit" class="btn btn-success">Update Book</button>
       </form>
-  
+
   </div>
 
   </div>

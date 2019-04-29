@@ -46,15 +46,17 @@
           </div>
 
           <div class="form-group">
-              <label for="available_copies_no">number of  copy:</label>
+              <label for="available_copies_no">number of available copy:</label>
               <input type="number" class="form-control" name="available_copies_no"/>
           </div>
           <select class="browser-default custom-select" name="category_id">
+            <option selected>Category</option>
             @foreach($categories as $category)
-                <option selected>Category</option>
+
                     <option value="{{$category->id}}">{{$category->name}}</option>
-        </select>
-        @endforeach
+                    @endforeach
+                </select>
+
         <div class="col-md-6">
             <input type="file" name="image" class="form-control">
 

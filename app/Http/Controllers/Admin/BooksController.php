@@ -93,10 +93,11 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-
+  //
+  $categories=Category::all();
     $book = Book::findOrFail($id);
 
-    return view('books.edit', compact('book'));
+    return view('books.edit', compact('book','categories'));
     }
 
     /**
@@ -106,10 +107,57 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        //
+        $image_name = $request->hidden_image;
+        $image = $request->file('image');
+        if($image != " ")
+        {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'description' => 'required',
+                'auther' => 'required',
+                'lease_fees' => 'required',
+                'total_copies_no' => 'required',
+                'available_copies_no' => 'required',
+                'category_id' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $image_name = rand().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('image'),$image_name);
+
+        }
+        else{
+            $request->validate([
+                'title' => 'required|max:255',
+                'description' => 'required',
+                'auther' => 'required',
+                'lease_fees' => 'required',
+                'total_copies_no' => 'required',
+                'available_copies_no' => 'required',
+                'category_id' => 'required'
+            ]);
+        }
+        $form_data=array(
+            'title' => $request->title,
+            'description' => $request->description,
+            'auther' => $request->auther,
+            'lease_fees' => $request->lease_fees,
+            'total_copies_no' => $request->total_copies_no,
+            'available_copies_no' => $request->available_copies_no,
+            'category_id' => $request->category_id,
+
+           'image' =>  $image_name
+
+        );
+
+        Book::whereId($id)->update($form_data );
+
+        return redirect('admin/books')->with('success', 'Book is successfully updated');
     }
+
 
     /**
      * Remove the specified resource from storage.
