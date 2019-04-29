@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Book extends Model
 {
     //
+
+    use SoftDeletes;
     public static function getRelatedBooks($categoryId)
     {
         $relatedBooks = self::where('category_id', $categoryId)

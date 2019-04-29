@@ -1,12 +1,13 @@
 @extends('layouts.adminNav')
 
 @section('content')
-<div>
-    <a class="btn btn-primary" style="margin: 19px;" href="{{ route('books.create')}}" class="btn btn-default">New books</a>
+<div class="right">
+    <a class="btn btn-success" style="margin: 19px;" href="{{ route('books.create')}}" class="btn btn-default"><i class="fas fa-plus"></i>New books</a>
     </div>
+
 <div class="top">
         @foreach($books as $book)
-<div class="card" style="width: 18rem;">
+<div class="card"  style="width:300px">
 
   {{-- <img class="card-img-top"  src="{{asset('imgage/'$book->image)}}" alt="Card image cap"> --}}
 <img class="card-img-top"  src="{{URL::to('/')}}/image/{{$book->image}}" alt="Card image cap" height="195" width="160">
@@ -28,5 +29,5 @@
   </div>
   @endforeach
   </div>
-</div>
+
 @endsection

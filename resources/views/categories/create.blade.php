@@ -4,7 +4,7 @@
 <div class="top">
 <div class="card uper">
   <div class="card-header ">
-  <h1>Add Category</h1>  
+  <h1>Add Category</h1>
   </div>
   <div class="card-body">
     @if ($errors->any())
@@ -17,7 +17,7 @@
       </div><br />
     @endif
       <form method="post" action="{{ route('categories.store') }}">
-      
+
           <div class="form-group">
               @csrf
               <label for="name">Category Name:</label>
@@ -27,14 +27,15 @@
   <label for="exampleFormControlTextarea4">Category discription</label>
   <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" class="form-control" name="discription"></textarea>
 </div>
-         
+
           <button type="submit" class="btn btn-success">Create Category</button>
+          <div class="right">
+                <button  class="btn btn-warning"> <a  href="/admin/categories">Back</a></button>
+            </div>
       </form>
   </div>
-  
+
 </div>
-<div class="right">
-      <button  class="btn btn-warning"> <a  href="/admin/categories">Back</a></button>
-  </div>
+
 </div>
 @endsection
