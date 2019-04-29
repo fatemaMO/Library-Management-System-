@@ -36,12 +36,12 @@
 
        <div class="form-group">
         <label for="lease_fees">lease_fees:</label>
-        <input type="number" class="form-control" name="lease_fees"  value="{{$book->lease_fees}}"/>
+        <input type="number"  step="0.01" class="form-control" name="lease_fees"  value="{{$book->lease_fees}}"/>
        </div>
 
        <div class="form-group">
         <label for="total_copies_no">number of total copy:</label>
-        <input type="number" class="form-control" name="total_copies_no" value="{{$book->total_copies_no}}"/>
+        <input type="number"  class="form-control" name="total_copies_no" value="{{$book->total_copies_no}}"/>
       </div>
 
       <div class="form-group">

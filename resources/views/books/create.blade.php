@@ -38,7 +38,7 @@
          </div>
          <div class="form-group">
               <label for="lease_fees">lease_fees:</label>
-              <input type="number" class="form-control" name="lease_fees"/>
+              <input type="number"  step="0.01" class="form-control" name="lease_fees"/>
           </div>
           <div class="form-group">
               <label for="total_copies_no">number of total copy:</label>
