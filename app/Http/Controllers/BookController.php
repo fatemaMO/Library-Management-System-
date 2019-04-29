@@ -32,4 +32,36 @@ class BookController extends Controller
 
     public function index()
     { }
+
+    //aml
+    public function bookLikeBook(Request $request){
+        $book_id = $request['bookId'];
+        $is_like = $request['isLike'] === true ;
+        $update = false;
+        $book = Book::find($book_id);
+        if(!$book){
+            return null;
+        }
+        $user = Auth::user();
+        $like = $user->likes()->where('book_id', $book_id)->first();
+        if($like){
+            $already_like = $like->like;
+            $update = true;
+            if($already_like == $is_like){
+                $like->delete();
+                return null;
+            }
+        } else{
+            $like = new Like();
+        }
+        $like->like = $is_like;
+        $like->user_id = $user->id;
+        $like->book_id = $book->id;
+        if($update){
+            $like->update();
+        } else{
+            $like->save();
+        }
+        return null;
+    }
 }

@@ -31,7 +31,3 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
-
-$('.like').on('click',function(event){
-    console.log(event);
-});

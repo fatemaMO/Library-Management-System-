@@ -16,7 +16,13 @@ Route::get('/', function () {
 });
 
 Route::resource('books', 'BookController');
+
+Route::post('/like', [
+    'uses' => 'BookController@bookLikeBook',
+    'as' => 'like'
+]);
 Route::resource('comments', 'CommentController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

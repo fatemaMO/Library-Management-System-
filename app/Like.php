@@ -2,7 +2,7 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
-class Favourite extends Model
+class Like extends Model
 {
     //
     public function user() {

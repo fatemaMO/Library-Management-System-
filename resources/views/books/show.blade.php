@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
 <head>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>This is book page</title>
 
     <!-- Compiled and minified CSS -->
@@ -13,6 +16,9 @@
     <link href="{{ asset('css/book.css') }}" rel="stylesheet">
 
 
+    <script type="text/javascript" src="{{ asset('../../js/app.js') }}"></script>
+
+    
 </head>
 
 <body>
@@ -143,8 +149,6 @@
             @endforeach
         </div>
 
-
-
     </div>
 
 
@@ -153,13 +157,20 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+
     <script>
+        let token = '{{ Session::token() }}';
+        let urlLike = '{{ route('like') }}';
+   
     $(function() {
         $(".heart").on("click", function() {
             console.log("nnnnnn")
@@ -168,9 +179,21 @@
     });
 
     $('.like').on('click',function(event){
-    console.log(event);
-    });
-    
+     
+     console.log(event);
+     event.preventDefault();
+     bookId = event.target.parentNode.parentNode.dataset['bookid']; 
+     let isLike = event.target.previousElementSibling == null;
+     $.ajax({
+         type: 'POST',
+         url: urlLike,
+         data: {isLike: isLike, bookId: bookId , _token: token}
+     })
+         .done(function(){
+             
+         });
+ });
+
     </script>
 
 </body>

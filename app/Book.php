@@ -20,7 +20,7 @@ class Book extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function favourites(){
-        return $this->hasMany('App\Favourite');
+    public function likes(){
+        return $this->hasMany('App\Like');
     }
 }
