@@ -57,8 +57,11 @@
             <input type="file" name="image" class="form-control">
 
         </div>
-          <button type="submit" class="btn btn-primary">Create Book</button>
+          <button type="submit" class="btn btn-success">Create Book</button>
       </form>
+ 
+<div class="right">
+      <button  class="btn btn-warning"> <a  href="/admin/categories">Back</a></button>
   </div>
 </div>
 

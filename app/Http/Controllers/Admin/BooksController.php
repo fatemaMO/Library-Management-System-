@@ -11,7 +11,7 @@ class BooksController extends Controller
 {
     public function index()
     {
-        /
+        //
     }
 
     /**
@@ -19,6 +19,10 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function show()
+    {
+        //
+    }
     public function create()
     {
         //
@@ -35,7 +39,33 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'auther' => 'required',
+            'lease_fees' => 'required',
+            'total_copies_no' => 'required',
+            'available_copies_no' => 'required',
+            'category_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $image =$request->file('image');
+        $new_name = rand().'.'.$image->getClientOrginalExtension;
+        $image->move(public_path('image'),new_name);
+        $form_data=array(
+            'title' => $request->title,
+            'description' => $request->description,
+            'auther' => $request->auther,
+            'lease_fees' => $request->lease_fees,
+            'total_copies_no' => $request->total_copies_no,
+            'available_copies_no' => $request->available_copies_no,
+            'category_id' => $request->category_id,
+            'image' =>  $new_name 
+
+        );
+        $book = Book::create($form_data);
+   
+        return redirect('/admin/books')->with('success', 'Book is successfully saved');
     }
 
     /**
