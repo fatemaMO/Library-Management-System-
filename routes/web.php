@@ -47,6 +47,7 @@ Route::resources(['books'     => 'BookController',
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/webBooks','BookController@webBooks');
 Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
+Route::post('bookSearch','BookController@search')->name('bookSearch');
 
 
 

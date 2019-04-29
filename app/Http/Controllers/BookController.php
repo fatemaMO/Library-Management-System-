@@ -8,6 +8,8 @@ use App\Category;
 
 use App\Book;
 
+use Illuminate\Support\Facades\View;
+
 class BookController extends Controller
 {
     /**
@@ -123,4 +125,21 @@ class BookController extends Controller
         $bookCategories = Category::all();
         return view('books.webBooks', compact('category','books','flag','bookCategories','active'));   
     }
+
+    public function search(Request $request) {
+        // debug("hhhh");
+        $books = array();
+        $flag = 0;
+        $valueToSearch = $request->input('value');
+        $valueToSearch = trim($valueToSearch);
+        if ($valueToSearch != '') {
+            $books = Book::where('title', 'like', "%$valueToSearch%")->orWhere('auther', 'like', "%$valueToSearch%")->get();
+        }
+        if (empty($books)) {
+            $flag = 1;
+        }
+        $view = View::make('books.webSearch')->with('books', $books)->render();
+        return response()->json(['flag' => $flag, 'view' => $view]);
+    }
+
 }
