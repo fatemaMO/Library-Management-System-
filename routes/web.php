@@ -27,17 +27,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
         Route::resources([
             'users' => 'Admin\UsersController',
-            'categories' => 'CategoryController',
+            'books' => 'Admin\BooksController',
+            'categories' => 'Admin\CategoryController',
 
-        
+
         ]);
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
     });
 
 
-    Route::resources(['books'     => 'BookController',
-                    'comments'   => 'CommentController',  
-                ]);
+    // Route::resources(['books'     => 'BookController',
+    //                 'comments'   => 'CommentController',
+    //             ]);
 
 });
 

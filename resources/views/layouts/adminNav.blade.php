@@ -13,8 +13,8 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-primary navbar-light">
-        <img src="../../../public/img/new_library_logo.gif"  alt="Smiley face" height="55" width="60">
-        
+        <img src="{{ asset('imgs/logo.gif') }}"  alt="Smiley face" height="55" width="60">
+
         <ul class="navbar-nav mr-auto ">
             <li class="navbar-brand">
                 <a class="nav-link" href="/admin/users" style="Color:#FFF">User</a>
@@ -53,7 +53,7 @@
             </li>
         </ul>
         </div>
- 
+
     </nav>
 
   <div class="container">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
-
+use App\Comment;
 use App\Book;
 
 use Illuminate\Support\Facades\View;
@@ -119,11 +119,11 @@ class BookController extends Controller
 
     public function categoryBooks ($id)
     {
-        
+
         $active = $id;
         $books = Book::orderBy('id', 'desc')->where('category_id',$id)->paginate(3);
         $bookCategories = Category::all();
-        return view('books.webBooks', compact('category','books','flag','bookCategories','active'));   
+        return view('books.webBooks', compact('category','books','flag','bookCategories','active'));
     }
 
     public function search(Request $request) {
