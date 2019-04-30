@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use Illuminate\Http\Request;
+
+use App\Category;
 use App\Comment;
-use Illuminate\Support\Facades\DB;
+use App\Book;
+
+use Illuminate\Support\Facades\View;
 
 class BookController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $userid = 1;
@@ -64,4 +73,103 @@ class BookController extends Controller
         }
         return null;
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    /* nourhan  */
+    public function webBooks ()
+    {
+        $bookCategories = Category::all();
+        $category  = Category::orderBy('created_at', 'asc')->first();
+        $active = $category->id;
+        $books = Book::orderBy('id', 'desc')->where('category_id',$active)->paginate(3);
+
+        return view('books.webBooks', compact('bookCategories','books','active'));
+    }
+
+    public function categoryBooks ($id)
+    {
+
+        $active = $id;
+        $books = Book::orderBy('id', 'desc')->where('category_id',$id)->paginate(3);
+        $bookCategories = Category::all();
+        return view('books.webBooks', compact('category','books','flag','bookCategories','active'));
+    }
+
+    public function search(Request $request) {
+        // debug("hhhh");
+        $books = array();
+        $flag = 0;
+        $valueToSearch = $request->input('value');
+        $valueToSearch = trim($valueToSearch);
+        if ($valueToSearch != '') {
+            $books = Book::where('title', 'like', "%$valueToSearch%")->orWhere('auther', 'like', "%$valueToSearch%")->get();
+        }
+        if (empty($books)) {
+            $flag = 1;
+        }
+        $view = View::make('books.webSearch')->with('books', $books)->render();
+        return response()->json(['flag' => $flag, 'view' => $view]);
+    }
+
 }
