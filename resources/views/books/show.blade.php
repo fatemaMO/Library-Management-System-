@@ -26,12 +26,6 @@
             <div class="col-3">
                 <img src="{{ asset('imgs/cover.jpg') }}" class="bookCover img-fluid">
             </div>
-            <div class="col-7">
-                <h3 class="bookTitle">{{ $book->title }}</h3>
-                <div class="stage float-right">
-                    <div class="heart"></div>
-                    <a href="#" class="like">favorite</a>
-                    <a href="#" class="like">unfavorite</a>
             <div class="col-7 bookArea">
                 <div class="row">
                     <div class="col-9">
@@ -63,6 +57,9 @@
                     <div class="col-3">
                         <div class="stage">
                             <div class="heart"></div>
+
+                            <a href="#" class="like">favorite</a>
+                            <a href="#" class="like">unfavorite</a>
                         </div>
                     </div>
                 </div>
@@ -201,12 +198,6 @@
             });
  });
 
-        $(function() {
-            $(".heart").on("click", function() {
-                console.log("nnnnnn")
-                $(this).toggleClass("is-active");
-            });
-        });
     </script>
 
 </body>
