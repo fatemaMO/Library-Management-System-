@@ -36,7 +36,7 @@ class BookController extends Controller
     //aml
     public function bookLikeBook(Request $request){
         $book_id = $request['bookId'];
-        $is_like = $request['isLike'] === true ;
+        $is_like = $request['isLike'] === true ? true: false;
         $update = false;
         $book = Book::find($book_id);
         if(!$book){
