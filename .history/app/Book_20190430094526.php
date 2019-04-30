@@ -8,10 +8,6 @@ class Book extends Model
     //
 
     protected $fillable = ['title', 'description', 'image','auther','lease_fees','total_copies_no','category_id'];
-    public function comments()
-    {
-        return $this->hasMany('App\Comment');
-    }
 }
 
 // $table->bigIncrements('id');

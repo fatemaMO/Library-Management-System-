@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     //
-
-    protected $fillable = ['title', 'description', 'image','auther','lease_fees','total_copies_no','category_id'];
-    public function comments()
+    public static function getRelatedBooks($categoryId)
     {
-        return $this->hasMany('App\Comment');
+        $relatedBooks = self::where('category_id', $categoryId)
+            ->limit(6)
+            ->get();
+        return $relatedBooks;
     }
+    protected $fillable = ['title', 'description', 'image','auther','lease_fees','total_copies_no','category_id'];
 }
 
 // $table->bigIncrements('id');

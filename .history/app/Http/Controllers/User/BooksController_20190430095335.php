@@ -38,10 +38,12 @@ class BooksController extends Controller
 
     private function getComments($id)
     {   
-        $comments = DB::table('comments')
-            ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-            ->where('book_id','=',$id)
-            ->get();
+        $comments = Comment::
+
+        // $comments = DB::table('comments')
+        //     ->leftJoin('users', 'users.id', '=', 'comments.user_id')
+        //     ->where('book_id','=',$id)
+        //     ->get();
 
         return $comments;
     }

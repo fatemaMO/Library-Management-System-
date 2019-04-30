@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 // user book controller
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
-Route::resource('comments', 'CommentController');
+Route::resource('comments', 'User\CommentController');
 // admin books controller
 Route::resource('admin/books', 'Admin\BooksController');
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
@@ -37,8 +37,6 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     Route::resources([
         'roles' => 'Admin\RolesController',
         'categories' => 'CategoryController',
-
-    
     ]);
 });
 Auth::routes();
