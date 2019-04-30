@@ -41,6 +41,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+// user book controller
+Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+Route::resource('comments', 'User\CommentController');
+// admin books controller
+
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/webBooks','BookController@webBooks');
+Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
+Route::post('bookSearch','BookController@search')->name('bookSearch');
+
 
 
