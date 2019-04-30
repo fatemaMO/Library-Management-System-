@@ -29,16 +29,16 @@ Route::group(['middleware' => 'auth'], function () {
             'users' => 'Admin\UsersController',
             'categories' => 'CategoryController',
 
-
+        
         ]);
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
     });
 
 
-    Route::resources([
-        'books'     => 'BookController',
-        'comments'   => 'CommentController',
-    ]);
+    Route::resources(['books'     => 'BookController',
+                    'comments'   => 'CommentController',  
+                ]);
+
 });
 
 // user book controller
@@ -60,6 +60,9 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/webBooks', 'BookController@webBooks');
-Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
-Route::post('bookSearch', 'BookController@search')->name('bookSearch');
+Route::get('/webBooks','BookController@webBooks');
+Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
+Route::post('bookSearch','BookController@search')->name('bookSearch');
+
+
+

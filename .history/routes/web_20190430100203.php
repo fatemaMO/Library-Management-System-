@@ -29,22 +29,23 @@ Route::group(['middleware' => 'auth'], function () {
             'users' => 'Admin\UsersController',
             'categories' => 'CategoryController',
 
-
+        
         ]);
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
     });
 
 
-    Route::resources([
-        'books'     => 'BookController',
-        'comments'   => 'CommentController',
-    ]);
+    Route::resources(['books'     => 'BookController',
+                    'comments'   => 'CommentController',  
+                ]);
+
 });
 
 // user book controller
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
 Route::resource('comments', 'User\CommentController');
 // admin books controller
+<<<<<<< HEAD
 Route::resource('admin/books', 'Admin\BooksController');
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
@@ -56,10 +57,15 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     ]);
 });
 Auth::routes();
+=======
+>>>>>>> 1e18b69f3429bfd80a66908f3bc9e97cea5127d5
 
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/webBooks', 'BookController@webBooks');
-Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
-Route::post('bookSearch', 'BookController@search')->name('bookSearch');
+Route::get('/webBooks','BookController@webBooks');
+Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
+Route::post('bookSearch','BookController@search')->name('bookSearch');
+
+
+

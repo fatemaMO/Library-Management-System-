@@ -1,9 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
+
+
+
+
 class CategoryController extends Controller
 {
     /**
@@ -14,10 +20,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
+         $categories = Category::all();
+        return view('categories.index', compact('categories'))->with('categories', $categories);
 
-        return view('categories.index', compact('categorie '))->with('categories', $categories);
-        
 
     }
 
@@ -31,7 +36,7 @@ class CategoryController extends Controller
         //
 
       return view('categories.create');
- 
+
     }
 
     /**
@@ -46,11 +51,11 @@ class CategoryController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'discription' => 'required'
-          
+
         ]);
         $category = Category::create($validatedData);
-   
-        return redirect('/categories')->with('success', 'Category is successfully saved');
+
+        return redirect('/admin/categories')->with('success', 'Category is successfully saved');
     }
 
     /**
@@ -91,11 +96,11 @@ class CategoryController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'discription' => 'required',
-            
+
         ]);
         Category::whereId($id)->update($validatedData);
 
-        return redirect('/categories')->with('success', 'Category is successfully updated');
+        return redirect('/admin/categories')->with('success', 'Category is successfully updated');
     }
 
     /**
@@ -110,6 +115,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return  redirect('/categories')->with('success', 'Category is successfully deleted');
+        return  redirect('/admin/categories')->with('success', 'Category is successfully deleted');
     }
 }
