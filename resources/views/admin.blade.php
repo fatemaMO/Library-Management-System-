@@ -14,6 +14,9 @@
                         </div>
                     @endif
                     You are logged in!
+                    <div class="title m-b-md">
+                        <img src="{{ asset('imgs/head.jpg') }}"alt="Smiley face" width="1365">
+                    </div>
                 </div>
             </div>
         </div>
