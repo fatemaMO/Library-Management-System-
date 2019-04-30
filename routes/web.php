@@ -35,16 +35,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    // Route::resources([
-    //     'books'     => 'BookController',
-    //     'comments'   => 'CommentController',
-    // ]);
 });
 
 // user book controller
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
 Route::resource('comments', 'User\CommentController');
-// admin books controller
+
 
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
