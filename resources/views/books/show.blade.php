@@ -193,7 +193,12 @@
          data: {isLike: isLike, bookId: bookId , _token: token}
      })
          .done(function(){
-             
+            event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this book' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this book' : 'Dislike';
+            if (isLike) {
+                event.target.nextElementSibling.innerText = 'Dislike';
+            } else {
+                event.target.previousElementSibling.innerText = 'Like';
+            }
 
             });
  });
