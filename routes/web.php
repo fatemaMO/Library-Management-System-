@@ -23,17 +23,17 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-
-Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
-    Route::resources([
-        'users' => 'Admin\UsersController',
-        'categories' => 'CategoryController',
-
-    
-    ]);
-    Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
-});
 Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
+        Route::resources([
+            'users' => 'Admin\UsersController',
+            'categories' => 'CategoryController',
+
+        
+        ]);
+        Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
+    });
+
 
     Route::resources(['books'     => 'BookController',
                     'comments'   => 'CommentController',  
