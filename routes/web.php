@@ -51,8 +51,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
     Route::resources([
-        'roles' => 'Admin\RolesController',
-        'categories' => 'CategoryController',
+        // !there was an error here
+        'roles' => 'Admin\UsersController',
+        'categories' => 'Admin\CategoryController',
     ]);
 });
 Auth::routes();
