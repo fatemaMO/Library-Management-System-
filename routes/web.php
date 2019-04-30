@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::resource('books', 'BookController');
+//Route::resource('books', 'BookController');
 
 Route::post('/like', [
     'uses' => 'BookController@bookLikeBook',
