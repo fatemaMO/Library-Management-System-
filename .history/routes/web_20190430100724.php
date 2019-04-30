@@ -27,32 +27,32 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
         Route::resources([
             'users' => 'Admin\UsersController',
-            'categories' => 'Admin\CategoryController',
-            'books' => 'Admin\BooksController',
+            'categories' => 'CategoryController',
+
 
         ]);
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
     });
 
 
-    // Route::resources([
-    //     'books'     => 'BookController',
-    //     'comments'   => 'CommentController',
-    // ]);
+    Route::resources([
+        'books'     => 'BookController',
+        'comments'   => 'CommentController',
+    ]);
 });
 
 // user book controller
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
 Route::resource('comments', 'User\CommentController');
 // admin books controller
-
+Route::resource('admin/books', 'Admin\BooksController');
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
     // Registration Routes...
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register');
     Route::resources([
         'roles' => 'Admin\RolesController',
-
+        'categories' => 'CategoryController',
     ]);
 });
 Auth::routes();

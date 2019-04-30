@@ -37,12 +37,12 @@ class BooksController extends Controller
     }
 
     private function getComments($id)
-    {   
+    {
+
         $comments = DB::table('comments')
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
             ->where('book_id','=',$id)
             ->get();
-
         return $comments;
     }
 
@@ -65,8 +65,7 @@ class BooksController extends Controller
         return round($avgRate);
     }
     private function getNumberOfRates($bookId){
-        $count = Comment::where('book_id',$bookId)->count('rate');
-        // $count = DB::table('comments')->where('book_id',$bookId)->count('rate');
+        $count = DB::table('comments')->where('book_id',$bookId)->count('rate');
         return $count;
     }
 
