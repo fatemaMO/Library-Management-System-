@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Like;
-use App\UserBook;
+use App\UsersBook;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
@@ -38,6 +38,6 @@ class Book extends Model
     }
 
     public function userBooks(){
-        return $this->hasMany('App\UserBook');
+        return $this->hasMany('App\UsersBook');
     }
 }

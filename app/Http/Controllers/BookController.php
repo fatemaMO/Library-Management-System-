@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Comment;
 use App\Book;
+use App\UsersBook;
 
 use Illuminate\Support\Facades\View;
 
@@ -173,8 +174,9 @@ class BookController extends Controller
     }
 
     public function getLeased(){
-        $userId = Auth::user()->id;
-        
+        $userId = 1;
+        $userBooks = UsersBook::all();
+        return view('books.leased', compact('userId','userBooks'));
     }
 
 }
