@@ -172,4 +172,9 @@ class BookController extends Controller
         return response()->json(['flag' => $flag, 'view' => $view]);
     }
 
+    public function getLeased(){
+        $userId = Auth::user()->id;
+        
+    }
+
 }
