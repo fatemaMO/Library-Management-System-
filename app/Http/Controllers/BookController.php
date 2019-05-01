@@ -176,7 +176,8 @@ class BookController extends Controller
     public function getLeased(){
         $userId = 1;
         $userBooks = UsersBook::all();
-        return view('books.leased', compact('userId','userBooks'));
+        $books = Book::all();
+        return view('books.leased', compact('userId','userBooks','books'));
     }
 
 }
