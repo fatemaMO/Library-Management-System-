@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Comment;
 use App\Book;
+use Auth;
 
 use Illuminate\Support\Facades\View;
 
@@ -44,14 +45,18 @@ class BookController extends Controller
 
     //aml
     public function bookLikeBook(Request $request){
+                var_dump("jhjhjhjh");
         $book_id = $request['bookId'];
         $is_like = $request['isLike'] === true ? true: false;
         $update = false;
+        var_dump($book_id);
+        var_dump($is_like);
         $book = Book::find($book_id);
         if(!$book){
             return null;
         }
         $user = Auth::user();
+        var_dump($user);
         $like = $user->likes()->where('book_id', $book_id)->first();
         if($like){
             $already_like = $like->like;
