@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Comment;
 use App\Book;
+use App\Like;
+use Auth;
 use App\UsersBook;
 
 use Illuminate\Support\Facades\View;
@@ -45,33 +47,45 @@ class BookController extends Controller
 
     //aml
     public function bookLikeBook(Request $request){
+                var_dump("jhjhjhjh");
         $book_id = $request['bookId'];
         $is_like = $request['isLike'] === true ? true: false;
         $update = false;
+        var_dump($book_id);
+        var_dump($is_like);
         $book = Book::find($book_id);
         if(!$book){
             return null;
         }
         $user = Auth::user();
+      //  var_dump($user);
         $like = $user->likes()->where('book_id', $book_id)->first();
+       
         if($like){
-            $already_like = $like->like;
-            $update = true;
-            if($already_like == $is_like){
+          //  $already_like = $like->like;
+           // $update = true;
+           // if($already_like == $is_like){
                 $like->delete();
-                return null;
-            }
+           //     return null;
+           // }
         } else{
-            $like = new Like();
+           // $like = new Like();
+            // $post =new Post(['name'=>'post1','body'=>'body1']);
+            var_dump("hjhh");
+            Like::create([
+                'user_id' =>$user->id,
+                'book_id'=>$book->id
+            ]);
         }
-        $like->like = $is_like;
+
+      /*  $like->like = $is_like;
         $like->user_id = $user->id;
         $like->book_id = $book->id;
         if($update){
             $like->update();
         } else{
             $like->save();
-        }
+        }*/
         return null;
     }
 

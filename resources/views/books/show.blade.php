@@ -81,7 +81,7 @@
         <form method="post" action="{{ route('comments.store') }}">
             @csrf
             <!-- get book id and book category -->
-            <input type="hidden" name="bookid" value="{{ $book->id }}">
+            <input type="hidden" name="bookid" value="{{ $book->id }}" id="bookIDcUSTOM">
             <div class="row">
                 <div class="col-8">
                     <div class="form-group">
@@ -198,30 +198,29 @@
             $(this).toggleClass("is-active");
         });
     });
-    // !Favourite button is unused
-    $('.like').on('click', function(event) {
 
-        console.log(event);
-        event.preventDefault();
-        bookId = event.target.parentNode.parentNode.dataset['bookid'];
-        let isLike = event.target.previousElementSibling == null;
-        $.ajax({
-                type: 'POST',
-                url: urlLike,
-                data: {
-                    isLike: isLike,
-                    bookId: bookId,
-                    _token: token
-                }
-            })
-            .done(function() {
-                event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this book' :
-                    'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this book' : 'Dislike';
-                if (isLike) {
-                    event.target.nextElementSibling.innerText = 'Dislike';
-                } else {
-                    event.target.previousElementSibling.innerText = 'Like';
-                }
+    $('.like').on('click',function(event){
+     
+     console.log(event);
+     event.preventDefault();
+
+    // bookId = event.target.parentNode.parentNode.dataset['bookid'];
+
+     bookId = parseInt($("#bookIDcUSTOM").val());
+     console.log(bookId);
+     let isLike = event.target.previousElementSibling == null;
+     $.ajax({
+         type: 'POST',
+         url: urlLike,
+         data: {isLike: isLike, bookId: bookId , _token: token}
+     })
+         .done(function(){
+            event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this book' : 'favorite' : event.target.innerText == 'unfavorite' ? 'You don\'t like this book' : 'unfavorite';
+            if (isLike) {
+                event.target.nextElementSibling.innerText = 'unfavorite';
+            } else {
+                event.target.previousElementSibling.innerText = 'favorite';
+            }
 
             });
     });
