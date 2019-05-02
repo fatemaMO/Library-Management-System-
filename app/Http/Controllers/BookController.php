@@ -20,7 +20,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $userid = 1;
+        $userid = Auth()->user()->id;
         // get the book
         $book = Book::find($id);
         // get available copies
