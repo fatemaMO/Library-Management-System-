@@ -16,7 +16,7 @@ class BooksController extends Controller
     public function show($id)
     {
         // !this will be the actual userId
-        $userid = 1;
+        $userid = Auth()->user()->id;
         // get the book
         $book = Book::find($id);
         // get available copies
@@ -26,80 +26,56 @@ class BooksController extends Controller
             $isAvailable = false;
         }
         // check if he can rate and comment
-        $canComment = Comment::canComment($id, $userid);
+        $canComment = self::canComment($id, $userid);
         // get the comments
-        $comments = Comment::getComments($id);
-        $relatedBooks = Book::getRelatedBooks($book->category_id);
+        $comments = self::getComments($id);
+        $relatedBooks = self::getRelatedBooks($book->category_id);
         $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
-        $avgRate = Comment::getAvgRate($id);
-        $numberOfRates = Comment::getNumberOfRates($id);
+        $avgRate = self::getAvgRate($id);
+        $numberOfRates = self::getNumberOfRates($id);
         return view('books.show', compact(['avgRate', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage', 'numberOfRates']));
     }
 
-    public function index()
-    {
-        //
+    private function getComments($id)
+    {   
+        $comments = DB::table('comments')
+            ->leftJoin('users', 'users.id', '=', 'comments.user_id')
+            ->select('users.name','comments.user_id','comments.book_id','comments.dicription','comments.rate','comments.id')
+            ->where('comments.book_id','=',$id)
+            ->get();
+
+        return $comments;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    private function canComment($bookid, $userid)
     {
-        //
+
+        $comments = self::getComments($bookid);
+        foreach ($comments as $comment) {
+            if ($comment->user_id == $userid && $comment->book_id == $bookid) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    private function getAvgRate($bookId){
+
+        // $avgRate = DB::table('comments')->where('book_id',$bookId)->avg('rate');
+        $avgRate = Comment::where('book_id',$bookId)->avg('rate');
+        return round($avgRate);
+    }
+    private function getNumberOfRates($bookId){
+        $count = Comment::where('book_id',$bookId)->count('rate');
+        // $count = DB::table('comments')->where('book_id',$bookId)->count('rate');
+        return $count;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    private function getRelatedBooks($categoryId)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $relatedBooks = Book::where('category_id', $categoryId)
+            ->limit(6)
+            ->get();
+        return $relatedBooks;
     }
 }

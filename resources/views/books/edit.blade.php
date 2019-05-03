@@ -36,36 +36,38 @@
 
        <div class="form-group">
         <label for="lease_fees">lease_fees:</label>
-        <input type="number" class="form-control" name="lease_fees"  value="{{$book->lease_fees}}"/>
+        <input type="number"  step="0.01" class="form-control" name="lease_fees"  value="{{$book->lease_fees}}"/>
        </div>
 
        <div class="form-group">
         <label for="total_copies_no">number of total copy:</label>
-        <input type="number" class="form-control" name="total_copies_no" value="{{$book->total_copies_no}}"/>
+        <input type="number"  class="form-control" name="total_copies_no" value="{{$book->total_copies_no}}"/>
       </div>
 
       <div class="form-group">
         <label for="available_copies_no">number of avaliable copy:</label>
       <input type="number" class="form-control" name="available_copies_no" value="{{$book->available_copies_no}}"/>
     </div>
+    <br>
     <select class="browser-default custom-select" name="category_id" value="{{$book->category->name}}">
                 <option selected>{{$book->category->name}}</option>
                 @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
     </select>
-
+<br><br>
     <div class="col-md-6">
         <input type="file" name="image" class="form-control">
         <img class="card-img-top"  src="{{URL::to('/')}}/image/{{$book->image}}" alt="Card image cap" height="200" width="100">
     <input type="hidden" name="hidden_image" value="{{$book->image}}"
     </div>
           <button type="submit" class="btn btn-success">Update Book</button>
+          <div class="right">
+            <button  class="btn btn-warning"> <a  href="/admin/books">Back</a></button>
+        </div>
       </form>
   </div>
 </div>
 </div>
-<div class="right">
-      <button  class="btn btn-warning"> <a  href="/admin/books">Back</a></button>
-  </div>
+
 @endsection

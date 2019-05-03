@@ -1,13 +1,10 @@
 @extends('layouts.adminNav')
 
 @section('content')
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
 
-<div class="card uper">
+
+
+<div class="card top">
   <div class="card-header">
    <h1> Add Book</h1>
   </div>
@@ -22,6 +19,7 @@
         </ul>
       </div><br />
     @endif
+
       <form method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
           <div class="form-group">
               @csrf
@@ -38,7 +36,7 @@
          </div>
          <div class="form-group">
               <label for="lease_fees">lease_fees:</label>
-              <input type="number" class="form-control" name="lease_fees"/>
+              <input type="number"  step="0.01" class="form-control" name="lease_fees"/>
           </div>
           <div class="form-group">
               <label for="total_copies_no">number of total copy:</label>
@@ -56,17 +54,23 @@
                     <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
+<br><br>
 
         <div class="col-md-6">
+               <label for="exampleFormControlFile1">Choose image</label>
             <input type="file" name="image" class="form-control">
 
         </div>
+
+        <br><br>
+
           <button type="submit" class="btn btn-success">Create Book</button>
+          <div class="right">
+                <button  class="btn btn-warning"> <a  href="/admin/books">Back</a></button>
+            </div>
       </form>
+    </div>
 
 
-</div>
-<div class="right">
-      <button  class="btn btn-warning"> <a  href="/admin/books">Back</a></button>
-  </div>
+
 @endsection
