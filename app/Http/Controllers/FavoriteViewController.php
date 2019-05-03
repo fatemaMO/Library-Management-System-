@@ -10,10 +10,10 @@ class FavoriteViewController extends Controller
 {
     public function index()
     {
-        $userid = Auth()->user()->id;
+        //$userid = Auth()->user()->id;
 
         // get the book
-        $book = Book::find($id);
+        //$book = Book::find($id);
                 
         return view('favorites.show');
     }
