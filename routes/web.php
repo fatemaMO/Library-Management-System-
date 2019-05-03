@@ -47,9 +47,13 @@ Route::resources(['books'     => 'BookController',
                 'comments'   => 'CommentController',  
             ]);
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
 Route::get('/webBooks','BookController@webBooks');
 Route::get('/getBooks/{id}/','BookController@categoryBooks')->name('getBooks');
 Route::post('bookSearch','BookController@search')->name('bookSearch');
+Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
 
 
 

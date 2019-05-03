@@ -117,6 +117,17 @@ class BookController extends Controller
         return view('books.webBooks', compact('bookCategories','books','active'));
     }
 
+    public function orderBooks ($field)
+    {
+        $bookCategories = Category::all();
+        $category  = Category::orderBy('created_at', 'asc')->first();
+        $active = $category->id;
+        $books = Book::orderBy("$field", 'desc')->where('category_id',$active)->paginate(3);
+
+        return view('books.webBooks', compact('bookCategories','books','active'));
+
+    }
+
     public function categoryBooks ($id)
     {
         
