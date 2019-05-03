@@ -71,4 +71,5 @@ Route::get('/webBooks', 'BookController@webBooks');
 Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
 Route::post('bookSearch', 'BookController@search')->name('bookSearch');
 Route::get('/getLeased', 'BookController@getLeased');
+Route::post('/lease', 'BookController@lease')->name('lease');
 Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');

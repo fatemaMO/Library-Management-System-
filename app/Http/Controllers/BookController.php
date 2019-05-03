@@ -12,6 +12,7 @@ use Auth;
 use App\UsersBook;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -199,10 +200,21 @@ class BookController extends Controller
     }
 
     public function getLeased(){
-        $userId = 1;
+        $userId = Auth()->user()->id;
         $userBooks = UsersBook::all();
         $books = Book::all();
         return view('books.leased', compact('userId','userBooks','books'));
     }
 
+    public function lease(Request $request){
+        $userId = Auth()->user()->id;
+        $days = $request->get('days');
+        $bookId = $request->get('bookId');
+        DB::table('users_books')->insert(
+            ['book_id'=>$bookId, 'user_id'=>$userId, 'days'=>$days]
+        );
+        DB::table('books')->where('id','=', $bookId)->decrement('available_copies_no', 1);
+        return redirect('/books/'. $bookId);
+
+    }
 }

@@ -50,7 +50,13 @@
                                 @if($isAvailable)
                                 <p class="availableMsg">{{$availabilityMessage}}</p>
                                 <!-- //! it needs an action -->
-                                <a class="borrow waves-effect waves-light  teal darken-2 btn">Borrow</a>
+                                <form method="post" action="{{ route('lease') }}">
+                                    @csrf
+                                <input type="hidden" value="{{$book->id}}" name="bookId">
+                                    <input type="submit" class="borrow waves-effect waves-light  teal darken-2 btn" value="Borrow">
+                                    <input id="number_of_days" type="number" class="form-control" name="days" min="1" max="30" value="1">
+                                    <span>Days</span>
+                                </form>
                                 @else
                                 <p class="unavailableMsg">No books are available</p>
                                 @endif
