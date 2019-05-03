@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
             'users' => 'Admin\UsersController',
             'categories' => 'Admin\CategoryController',
             'books' => 'Admin\BooksController',
-
         ]);
+        Route::get('/profit', 'Admin\ProfitsController@calculateProfit');
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
         //end of admin routes
     });
@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('bookSearch', 'BookController@search')->name('bookSearch');
     Route::get('/getLeased', 'BookController@getLeased');
     Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
+    Route::post('/lease', 'BookController@lease')->name('lease');
     
     //end of user routes
 });

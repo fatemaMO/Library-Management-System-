@@ -21,30 +21,6 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $userid = Auth()->user()->id;
-        // get the book
-        $book = Book::find($id);
-        // get available copies
-        $copiesAvailable = $book->available_copies_no;
-        $isAvailable = true;
-        if ($copiesAvailable == 0) {
-            $isAvailable = false;
-        }
-        // check if he can rate and comment
-        $canComment = Comment::canComment($id, $userid);
-        // get the comments
-        $comments = Comment::getComments($id);
-        $relatedBooks = Book::getRelatedBooks($book->category_id);
-        $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
-        $avgRate = Comment::getAvgRate($id);
-        $numberOfRates = Comment::getNumberOfRates($id);
-        return view('books.show', compact(['avgRate', 'oldComment', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage' , 'numberOfRates']));
-    }
-
-    public function index()
-    { }
 
     //aml
     public function bookLikeBook(Request $request){
@@ -89,69 +65,6 @@ class BookController extends Controller
         }*/
         return null;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     /* nourhan  */
     public function webBooks ()
     {
@@ -207,14 +120,17 @@ class BookController extends Controller
     }
 
     public function lease(Request $request){
-        $userId = Auth()->user()->id;
-        $days = $request->get('days');
-        $bookId = $request->get('bookId');
-        DB::table('users_books')->insert(
-            ['book_id'=>$bookId, 'user_id'=>$userId, 'days'=>$days]
-        );
+        // $userId = Auth()->user()->id;
+        $days = $request->days;
+        $bookId = $request->bookId;
+        $profit = Book::find($bookId)->lease_fees*$days;
+        $leasedBook = new UsersBook;
+        $leasedBook->book_id = $bookId;
+        $leasedBook->days = $days;
+        $leasedBook->profit = $profit;
+        $leasedBook->user_id = Auth()->user()->id;
+        $leasedBook->save();
         DB::table('books')->where('id','=', $bookId)->decrement('available_copies_no', 1);
         return redirect('/books/'. $bookId);
-
     }
 }
