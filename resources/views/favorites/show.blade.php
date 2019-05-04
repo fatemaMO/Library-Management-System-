@@ -38,7 +38,7 @@
     
     <div class="row">
       <div class="cell" data-title="Username">
-      {{ $book->title }}
+      aml 
       </div>
       <div class="cell" data-title="Email">
         misterninja@hotmail.com
