@@ -24,18 +24,14 @@ class BookController extends Controller
 
     //aml
     public function bookLikeBook(Request $request){
-                var_dump("jhjhjhjh");
         $book_id = $request['bookId'];
-        $is_like = $request['isLike'] === true ? true: false;
-        $update = false;
-        var_dump($book_id);
-        var_dump($is_like);
+        // $is_like = $request['isLike'] === true ? true: false;
+        // $update = false;
         $book = Book::find($book_id);
         if(!$book){
             return null;
         }
         $user = Auth::user();
-      //  var_dump($user);
         $like = $user->likes()->where('book_id', $book_id)->first();
        
         if($like){
@@ -48,10 +44,10 @@ class BookController extends Controller
         } else{
            // $like = new Like();
             // $post =new Post(['name'=>'post1','body'=>'body1']);
-            var_dump("hjhh");
             Like::create([
                 'user_id' =>$user->id,
-                'book_id'=>$book->id
+                'book_id'=>$book_id,
+                'like'=>1
             ]);
         }
 

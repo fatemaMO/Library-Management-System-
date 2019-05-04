@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Book;
 use App\Comment;
+use App\Like;
 use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
@@ -33,7 +34,8 @@ class BooksController extends Controller
         $availabilityMessage = $copiesAvailable > 1 ? $copiesAvailable . " books are available" : "One book is available";
         $avgRate = self::getAvgRate($id);
         $numberOfRates = self::getNumberOfRates($id);
-        return view('books.show', compact(['avgRate', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage', 'numberOfRates']));
+        $isFavourite = self::isFavourite($id);
+        return view('books.show', compact(['isFavourite','avgRate', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage', 'numberOfRates']));
     }
 
     private function getComments($id)
@@ -77,5 +79,17 @@ class BooksController extends Controller
             ->limit(6)
             ->get();
         return $relatedBooks;
+    }
+
+    private function isFavourite ($bookId){
+        $userId = Auth()->user()->id;
+        $result = Like::where('user_id', $userId)
+        ->where('book_id',$bookId)
+        ->get()
+        ->count();
+        if ($result==0) {
+            return false;
+        }
+        return true;
     }
 }
