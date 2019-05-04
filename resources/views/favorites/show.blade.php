@@ -19,6 +19,11 @@
     <div class="row">
       <div class="cell" data-title="Username">
       aml 
+
+      @foreach ($books as $book)
+          <p> {{ $book->id }}</p>
+      @endforeach
+
       </div>
       <div class="cell" data-title="Email">
         misterninja@hotmail.com

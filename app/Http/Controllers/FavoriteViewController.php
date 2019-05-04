@@ -14,9 +14,13 @@ class FavoriteViewController extends Controller
 
         // get the book
         //$book = Book::find($id);
-               
-        echo "";
-        return DB::table('favorites')->get();
+
+        
+
+        $user= Auth()->user();
+        $favorites = $user->favorites;
+        return view('favorites.show', compact('favorites'));
+        //dd($favorites);
 
         //return view('favorites.show');
     }

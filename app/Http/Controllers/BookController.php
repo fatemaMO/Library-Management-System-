@@ -47,7 +47,6 @@ class BookController extends Controller
             Like::create([
                 'user_id' =>$user->id,
                 'book_id'=>$book_id,
-                'like'=>1
             ]);
         }
 
