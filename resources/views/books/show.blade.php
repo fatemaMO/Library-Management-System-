@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row book">
         <div class="col-3">
-            <img src="{{ asset('imgs/cover.jpg') }}" class="bookCover img-fluid" />
+            <img src="{{URL::to('/')}}/image/{{$book->image}}" class="bookCover img-fluid" />
         </div>
         <div class="col-7 bookArea">
             <div class="row">
@@ -146,7 +146,7 @@
     <div class="row">
         @foreach ($relatedBooks as $related)
         <div class="col-2 text-center">
-            <a href="/books/{{ $related->id }}"><img style="width:100%;height:190px" src="{{ asset('imgs/cover.jpg') }}"
+            <a href="/books/{{ $related->id }}"><img style="width:100%;height:190px" src="{{URL::to('/')}}/image/{{$related->image}}"
                     alt="" /></a>
 
             <h3>{{ $related->title }}</h3>
@@ -182,9 +182,6 @@
 </script>
 
 <script>
-    
-    // let urlLike = '{{ route('like') }}';
-        // classList = $("selector").prop("classList")
         $(function() {
             $(".heart").on("click", function() {
                 let isLike
@@ -195,9 +192,9 @@
                 else{
                      isLike = false
                 }
+                // the related book chaged the book id
                 const bookId = {{ $book->id }};
                 console.log(bookId)
-        //  let isLike = event.target.previousElementSibling == null;
          $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
