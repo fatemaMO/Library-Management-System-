@@ -19,6 +19,7 @@ class FavoriteViewController extends Controller
 
         $user= Auth()->user();
         $favorites = $user->favorites;
+        //dd($favorites);
         return view('favorites.show', compact('favorites'));
         //dd($favorites);
 
