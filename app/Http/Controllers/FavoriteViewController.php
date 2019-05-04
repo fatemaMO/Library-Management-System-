@@ -18,6 +18,6 @@ class FavoriteViewController extends Controller
         echo "";
         return DB::table('favorites')->get();
 
-        return view('favorites.show');
+        //return view('favorites.show');
     }
 }
