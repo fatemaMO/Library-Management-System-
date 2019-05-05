@@ -17,11 +17,12 @@
     }
   }
   
-  .wrapper {
+  /*.wrapper {
     margin: 0 auto;
     padding: 40px;
     max-width: 800px;
-  }
+  }*/
+  
   h1{
       color: aliceblue;
       text-align: center;
