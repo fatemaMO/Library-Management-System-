@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/**
+ * login and reset password
+ */
+
 // Authentication Routes..
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/login', 'Auth\LoginController@showLoginForm');
@@ -25,47 +30,51 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+/**
+ * Admin Routes
+ */
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group(['middleware' => 'auth'], function () {
     //admiiiinnnnnn
+
     Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
         Route::resources([
-            'users' => 'Admin\UsersController',
             'categories' => 'Admin\CategoryController',
             'books' => 'Admin\BooksController',
         ]);
+
+        Route::resource('users', 'Admin\UsersController')->except('index', 'show');
+        Route::get('users/{type}','Admin\UsersController@index');
         Route::get('/profit', 'Admin\ProfitsController@calculateProfit');
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
         //end of admin routes
     });
-    //user rounts 
+});
 
-    Route::post('/like', [
-        'uses' => 'BookController@bookLikeBook',
-        'as' => 'like'
-    ]);
-    
-    Route::get("favorite","FavoriteViewController@index");
-    
-    Route::resource('comments', 'CommentController');
-    
-    // user book controller
-    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
-    Route::resource('comments', 'User\CommentController');
-    
-    
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/webBooks', 'BookController@webBooks');
-    Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
-    Route::post('bookSearch', 'BookController@search')->name('bookSearch');
-    Route::get('/getLeased', 'BookController@getLeased');
-    Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
-    Route::post('/lease', 'BookController@lease')->name('lease');
-
-    /* user edit details */
-    Route::get('/editProfile/{id}' , 'HomeController@profile')->name('profile');
-    Route::put('updateProfile/{id}', 'HomeController@updateProfile')->name('updateProfile');
-    
-    //end of user routes
+/**
+ * User Routes
+ */
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'user'], function () {
+        Route::resource('comments', 'CommentController');
+        Route::post('/like', [
+            'uses' => 'BookController@bookLikeBook',
+            'as' => 'like'
+        ]);
+        Route::get("favorite","FavoriteViewController@index");
+        Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+        Route::resource('comments', 'User\CommentController');
+        Route::get('/webBooks', 'BookController@webBooks');
+        Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
+        Route::post('bookSearch', 'BookController@search')->name('bookSearch');
+        Route::get('/getLeased', 'BookController@getLeased');
+        Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
+        Route::post('/lease', 'BookController@lease')->name('lease');
+        Route::get('/editProfile/{id}' , 'HomeController@profile')->name('profile');
+        Route::put('updateProfile/{id}', 'HomeController@updateProfile')->name('updateProfile');
+    });
 });
 
 

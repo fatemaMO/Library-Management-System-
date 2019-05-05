@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role_id == 1){
+        if(Auth::user()->type == 'manager' || Auth::user()->type == 'super_admin'){
             return view('admin');
         }
         else{

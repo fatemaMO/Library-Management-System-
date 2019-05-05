@@ -65,8 +65,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
         {
-            $roles=Role::all();
-            return view('auth.register', compact('roles'));
+            return view('auth.register');
         }
 
     /**

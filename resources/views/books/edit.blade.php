@@ -49,6 +49,13 @@
       <input type="number" class="form-control" name="available_copies_no" value="{{$book->available_copies_no}}"/>
     </div>
     <br>
+<<<<<<< HEAD
+    <select class="browser-default custom-select" name="category_id" value="{{$book->category->name}}">
+                <option value="{{$book->category->id}}" selected>{{$book->category->name}}</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+=======
     <select class="browser-default custom-select" name="category_id" >
     <option value="">select category</option>
     @if(count($categories) > 0)
@@ -60,6 +67,7 @@
         @endif
       @endforeach
     @endif
+>>>>>>> f5f5d4d4a91937681a2e649c77f5f73edc0ac4b1
     </select>
 <br><br>
     <div class="col-md-6">

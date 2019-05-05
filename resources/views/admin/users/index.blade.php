@@ -2,15 +2,7 @@
 
 @section('content')
     <div class="container">
-        {{-- <div class = "row">
-            <div class="col-md-12">
-                <h1> Users </div>
-            </div>
-        </div> --}}
-
-            {{-- <div class="col-md-12">
-                <a href="{{route('users.create')}}" class="btn btn primary" > Add new user </a>
-            </div> --}}
+        @if(isset($users))
             <br><br>
             <div class=" row right">
                 <a class="btn btn-success" href="{{route('users.create')}}" class="btn btn-default"><i class="fas fa-plus"></i> new user </a>
@@ -26,7 +18,6 @@
                        <td>username</td>
                         <td>phone</td>
                        <td>national_id</td>
-                        <td>role_id</td>
                         <td>active</td>
                         <td colspan="4">action</td>
                        
@@ -40,7 +31,6 @@
                         <td>{{$user->username}}</td>
                         <td>{{$user->phone}}</td>
                         <td>{{$user->national_id}}</td>
-                        <td>{{$user->role->name}}</td>
                         <td>@if($user->is_active == true) active @else disactive @endif</td>
                         <td>
                             <a href="{{route('users.edit', ['id' => $user->id ])}}" class="btn btn-info"><i class="fas fa-edit"></i>Edit</a>
@@ -66,7 +56,10 @@
 
                 </tbody>
             </table>
+      
         </div>
-
+        @else
+        {{$msg}}
+@endif
     </div>
 @endsection
