@@ -16,8 +16,10 @@
  */
 
 // Authentication Routes..
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
+Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('/login', 'Auth\LoginController@showLoginForm');
+
+Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
@@ -32,6 +34,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
  * Admin Routes
  */
 Route::group(['middleware' => 'auth'], function () {
+    //admiiiinnnnnn
     Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
         Route::resources([
             'categories' => 'Admin\CategoryController',
@@ -39,7 +42,9 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
         Route::resource('users', 'UsersController')->except('index');
         Route::get('users/{type}','UserController@index');
+        Route::get('/profit', 'Admin\ProfitsController@calculateProfit');
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
+        //end of admin routes
     });
 });
 
@@ -48,6 +53,42 @@ Route::group(['middleware' => 'auth'], function () {
  */
 Route::group(['middleware' => 'auth'], function () {
    
+    Route::post('/like', [
+        'uses' => 'BookController@bookLikeBook',
+        'as' => 'like'
+    ]);
+    
+    Route::get("favorite","FavoriteViewController@index");
+    
+    Route::resource('comments', 'CommentController');
+    
+    // user book controller
+    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+    Route::resource('comments', 'User\CommentController');
+    // admin books controller
+    //user rounts 
+
+    Route::post('/like', [
+        'uses' => 'BookController@bookLikeBook',
+        'as' => 'like'
+    ]);
+    
+    Route::get("favorite","FavoriteViewController@index");
+    
+    Route::resource('comments', 'CommentController');
+    
+    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+    Route::resource('comments', 'User\CommentController');
+    
+    
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/webBooks', 'BookController@webBooks');
+    Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
+    Route::post('bookSearch', 'BookController@search')->name('bookSearch');
+    Route::get('/getLeased', 'BookController@getLeased');
+    Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
+    Route::post('/lease', 'BookController@lease')->name('lease');
+    
 
 });
 
@@ -64,10 +105,29 @@ Route::resource('comments', 'CommentController');
 Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
 Route::resource('comments', 'User\CommentController');
 // admin books controller
+    //user rounts 
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/webBooks', 'BookController@webBooks');
-Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
-Route::post('bookSearch', 'BookController@search')->name('bookSearch');
-Route::get('/getLeased', 'BookController@getLeased');
-Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
+    Route::post('/like', [
+        'uses' => 'BookController@bookLikeBook',
+        'as' => 'like'
+    ]);
+    
+    Route::get("favorite","FavoriteViewController@index");
+    
+    Route::resource('comments', 'CommentController');
+    
+    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+    Route::resource('comments', 'User\CommentController');
+    
+    
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/webBooks', 'BookController@webBooks');
+    Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
+    Route::post('bookSearch', 'BookController@search')->name('bookSearch');
+    Route::get('/getLeased', 'BookController@getLeased');
+    Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
+    Route::post('/lease', 'BookController@lease')->name('lease');
+    
+
+
+

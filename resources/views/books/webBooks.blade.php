@@ -1,7 +1,6 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +8,13 @@
       <title>Bootstrap Example</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="{{ asset('css/web.css') }}" rel="stylesheet">
-    </head>
+      <link href="{{ asset('css/web.css') }}" rel="stylesheet"> -->
+    <!-- </head> -->
     
-    <body>
+    <!-- <body> --> 
+    @extends('layouts.userNav')
+
+@section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
@@ -58,7 +60,8 @@
                     @forelse ($books as $book)
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            <img class="card-img-top"  src="{{URL::to('/')}}/image/{{$book->image}}" alt="Card image cap" width="100%" height="225" >
+                                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
                                 <div class="card-body">
                                     <p class="card-text captalize">
                                     {{$book->title}}
@@ -74,7 +77,9 @@
                                 
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <a href="<?php echo route('book.show', ['id' => $book->id])?>"> View </a>
+                                        <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
+
                                         </div>
                                         <small class="text-muted"> No. of Copies :{{$book->available_copies_no}} </small>
                                     </div>
@@ -97,38 +102,5 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-<!-- <script type="text/javascript" src="{{ asset('js/ajax.js') }}">
-</script> -->
-<script type="text/javascript">
-
-    // var bookSearch = {{ route('bookSearch') }};
-    $('#search-book').on('keyup', function () {
-    var value = $("#search-book").val();
-    $.ajax({
-        type: 'POST',
-        url: '/bookSearch',
-        data: {
-            // '_token': $('input[name=_token]').val(),
-            '_token': "{{ csrf_token() }}",
-            value: value
-        },
-        success: function (msg) {
-            // alert("jhhj");
-            if (msg.flag == 0)
-            {
-                $(".seacrch_books_contrent").html(msg.view);
-                $(".orginal-search").css("display", "none");
-            }
-            else if (msg.flag == 1)
-            {
-                $(".orginal-search").css("display", "block");
-                $(".seacrch_books_contrent").html("");
-            }
-        }
-    });
-});
-</script>
-    </body>
-</html>
+  
+@endsection
