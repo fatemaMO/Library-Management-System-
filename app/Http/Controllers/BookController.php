@@ -63,9 +63,13 @@ class BookController extends Controller
     /* nourhan  */
     public function webBooks ()
     {
+        $active = null;
         $bookCategories = Category::all();
         $category  = Category::orderBy('created_at', 'asc')->first();
-        $active = $category->id;
+        if(isset($category))
+        {
+            $active = $category->id;
+        }
         $books = Book::orderBy('id', 'desc')->where('category_id',$active)->paginate(3);
 
         return view('books.webBooks', compact('bookCategories','books','active'));
@@ -88,7 +92,7 @@ class BookController extends Controller
         $active = $id;
         $books = Book::orderBy('id', 'desc')->where('category_id',$id)->paginate(3);
         $bookCategories = Category::all();
-        return view('books.webBooks', compact('category','books','flag','bookCategories','active'));
+        return view('books.webBooks', compact('books','bookCategories','active'));
     }
 
     public function search(Request $request) {

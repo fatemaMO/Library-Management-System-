@@ -104,26 +104,27 @@
                                 @endif
                             </div>
                         </div>
-
+                        @if(Auth::user()->type == 'super_admin')
                         <div class="form-group row">
-                            <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
 
                             <div class="col-md-6">
-                                <select id="role_id"  class="form-control{{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="role_id" value="{{ old('role_id') }}">
-                                    <option value="">Please choose a role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                <select id="type"  class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" >
+                                    <option value="">Please choose a type</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="user">User</option>
 
-                                    @endforeach
+
                                 </select>
 
-                                @if ($errors->has('role_id'))
+                                @if ($errors->has('type'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('role_id') }}</strong>
+                                        <strong>{{ $errors->first('type') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
+                        @endif
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
