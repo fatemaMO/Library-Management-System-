@@ -49,8 +49,8 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-       $user = new User();
-       $type = $request['type'] || 'user';
+        $user = new User();
+        $type = ($request['type'])? $request['type']: 'user';
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -105,19 +105,20 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-       
+        $type = ($request['type'])? $request['type']: 'user';
+
         $user = User::find($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'username' => $request['username'],
             'phone' => $request['phone'],
             'national_id' => $request['national_id'],
-            'type' => $request['type'] || 'user',
+            'type' => $type,
             'is_active' => true,
        
         ]);
         if ($user) {
-            return redirect('/admin/users')->with('success', 'user updated successfully');
+            return redirect("/admin/users/$type")->with('success', 'user updated successfully');
         }
 
         return Redirect::back()->withInput();
@@ -132,8 +133,9 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $type = $user->type;
         if($user->delete()){
-            return redirect('/admin/users')->with('success', 'user deleted successfully');
+            return redirect("/admin/users/$type")->with('success', 'user deleted successfully');
         }
         return Redirect::back()->withInput();
 
@@ -141,9 +143,10 @@ class UsersController extends Controller
 
     public function activate($id){
         $user = User::find($id);
+        $type = $user->type;
         $user->is_active = !$user->is_active;
         if($user->save()){
-            return redirect('/admin/users')->with('success', 'user updated successfully');
+            return redirect("/admin/users/$type")->with('success', 'user updated successfully');
         }
         return Redirect::back()->withInput();
     }
