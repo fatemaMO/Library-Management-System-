@@ -84,7 +84,42 @@
         <span>Maktabty(C) All rights Reserved</span>
     </footer>
 
-    @yield('js')
+    <!-- @yield('js') -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!-- <script type="text/javascript" src="{{ asset('js/ajax.js') }}">
+</script> -->
+<script type="text/javascript">
+
+    // var bookSearch = {{ route('bookSearch') }};
+    $('#search-book').on('keyup', function () {
+    var value = $("#search-book").val();
+    $.ajax({
+        type: 'POST',
+        url: '/bookSearch',
+        data: {
+            // '_token': $('input[name=_token]').val(),
+            '_token': "{{ csrf_token() }}",
+            value: value
+        },
+        success: function (msg) {
+            // alert("jhhj");
+            if (msg.flag == 0)
+            {
+                $(".seacrch_books_contrent").html(msg.view);
+                $(".orginal-search").css("display", "none");
+            }
+            else if (msg.flag == 1)
+            {
+                $(".orginal-search").css("display", "block");
+                $(".seacrch_books_contrent").html("");
+            }
+        }
+    });
+});
+</script>
+    
 </body>
 
 </html>
