@@ -23,11 +23,13 @@
 
         <ul class="navbar-nav mr-auto ">
             <li class="navbar-brand">
-                <a class="nav-link" href="/admin/users" style="Color:#FFF">User</a>
+                <a class="nav-link" href="/admin/users/user" style="Color:#FFF">User</a>
             </li>
+            @if( Auth::user()->type == 'super_admin')
             <li class="navbar-brand">
-                <a class="nav-link" href="/admin/mangers" style="Color:#FFF">Mangers</a>
+                <a class="nav-link" href="/admin/users/manager" style="Color:#FFF">Mangers</a>
             </li>
+            @endif
             <li class="navbar-brand">
                 <a class="nav-link" href="/admin/books" style="Color:#FFF">Books</a>
             </li>

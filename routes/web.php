@@ -33,15 +33,20 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 /**
  * Admin Routes
  */
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group(['middleware' => 'auth'], function () {
     //admiiiinnnnnn
+
     Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
         Route::resources([
             'categories' => 'Admin\CategoryController',
             'books' => 'Admin\BooksController',
         ]);
-        Route::resource('users', 'UsersController')->except('index');
-        Route::get('users/{type}','UserController@index');
+
+        Route::resource('users', 'Admin\UsersController')->except('index', 'show');
+        Route::get('users/{type}','Admin\UsersController@index');
         Route::get('/profit', 'Admin\ProfitsController@calculateProfit');
         Route::get('/admin/users/activate/{id}', 'Admin\UsersController@activate')->name('users.active');
         //end of admin routes
@@ -52,82 +57,23 @@ Route::group(['middleware' => 'auth'], function () {
  * User Routes
  */
 Route::group(['middleware' => 'auth'], function () {
-   
-    Route::post('/like', [
-        'uses' => 'BookController@bookLikeBook',
-        'as' => 'like'
-    ]);
-    
-    Route::get("favorite","FavoriteViewController@index");
-    
-    Route::resource('comments', 'CommentController');
-    
-    // user book controller
-    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
-    Route::resource('comments', 'User\CommentController');
-    // admin books controller
-    //user rounts 
-
-    Route::post('/like', [
-        'uses' => 'BookController@bookLikeBook',
-        'as' => 'like'
-    ]);
-    
-    Route::get("favorite","FavoriteViewController@index");
-    
-    Route::resource('comments', 'CommentController');
-    
-    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
-    Route::resource('comments', 'User\CommentController');
-    
-    
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/webBooks', 'BookController@webBooks');
-    Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
-    Route::post('bookSearch', 'BookController@search')->name('bookSearch');
-    Route::get('/getLeased', 'BookController@getLeased');
-    Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
-    Route::post('/lease', 'BookController@lease')->name('lease');
-    
-
+    Route::group(['middleware' => 'user'], function () {
+        Route::resource('comments', 'CommentController');
+        Route::post('/like', [
+            'uses' => 'BookController@bookLikeBook',
+            'as' => 'like'
+        ]);
+        Route::get("favorite","FavoriteViewController@index");
+        Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
+        Route::resource('comments', 'User\CommentController');
+        Route::get('/webBooks', 'BookController@webBooks');
+        Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
+        Route::post('bookSearch', 'BookController@search')->name('bookSearch');
+        Route::get('/getLeased', 'BookController@getLeased');
+        Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
+        Route::post('/lease', 'BookController@lease')->name('lease');
+    });
 });
-
-Route::post('/like', [
-    'uses' => 'BookController@bookLikeBook',
-    'as' => 'like'
-]);
-
-Route::get("favorite","FavoriteViewController@index");
-
-Route::resource('comments', 'CommentController');
-
-// user book controller
-Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
-Route::resource('comments', 'User\CommentController');
-// admin books controller
-    //user rounts 
-
-    Route::post('/like', [
-        'uses' => 'BookController@bookLikeBook',
-        'as' => 'like'
-    ]);
-    
-    Route::get("favorite","FavoriteViewController@index");
-    
-    Route::resource('comments', 'CommentController');
-    
-    Route::get('books/{book}', ['as' => 'book.show', 'uses' => 'User\BooksController@show']);
-    Route::resource('comments', 'User\CommentController');
-    
-    
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/webBooks', 'BookController@webBooks');
-    Route::get('/getBooks/{id}/', 'BookController@categoryBooks')->name('getBooks');
-    Route::post('bookSearch', 'BookController@search')->name('bookSearch');
-    Route::get('/getLeased', 'BookController@getLeased');
-    Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
-    Route::post('/lease', 'BookController@lease')->name('lease');
-    
 
 
 
