@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
-
+use App\Comment;
 use App\Book;
+use App\Like;
+use Auth;
+use App\UsersBook;
 
 use Illuminate\Support\Facades\View;
 
@@ -19,7 +22,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $userid = 1;
+        $userid = Auth()->user()->id;
         // get the book
         $book = Book::find($id);
         // get available copies
@@ -40,8 +43,50 @@ class BookController extends Controller
     }
 
     public function index()
-    {
-        //
+    { }
+
+    //aml
+    public function bookLikeBook(Request $request){
+                var_dump("jhjhjhjh");
+        $book_id = $request['bookId'];
+        $is_like = $request['isLike'] === true ? true: false;
+        $update = false;
+        var_dump($book_id);
+        var_dump($is_like);
+        $book = Book::find($book_id);
+        if(!$book){
+            return null;
+        }
+        $user = Auth::user();
+      //  var_dump($user);
+        $like = $user->likes()->where('book_id', $book_id)->first();
+       
+        if($like){
+          //  $already_like = $like->like;
+           // $update = true;
+           // if($already_like == $is_like){
+                $like->delete();
+           //     return null;
+           // }
+        } else{
+           // $like = new Like();
+            // $post =new Post(['name'=>'post1','body'=>'body1']);
+            var_dump("hjhh");
+            Like::create([
+                'user_id' =>$user->id,
+                'book_id'=>$book->id
+            ]);
+        }
+
+      /*  $like->like = $is_like;
+        $like->user_id = $user->id;
+        $like->book_id = $book->id;
+        if($update){
+            $like->update();
+        } else{
+            $like->save();
+        }*/
+        return null;
     }
 
     /**
@@ -117,13 +162,24 @@ class BookController extends Controller
         return view('books.webBooks', compact('bookCategories','books','active'));
     }
 
+    public function orderBooks ($field)
+    {
+        $bookCategories = Category::all();
+        $category  = Category::orderBy('created_at', 'asc')->first();
+        $active = $category->id;
+        $books = Book::orderBy("$field", 'desc')->where('category_id',$active)->paginate(3);
+
+        return view('books.webBooks', compact('bookCategories','books','active'));
+
+    }
+
     public function categoryBooks ($id)
     {
-        
+
         $active = $id;
         $books = Book::orderBy('id', 'desc')->where('category_id',$id)->paginate(3);
         $bookCategories = Category::all();
-        return view('books.webBooks', compact('category','books','flag','bookCategories','active'));   
+        return view('books.webBooks', compact('category','books','flag','bookCategories','active'));
     }
 
     public function search(Request $request) {
@@ -140,6 +196,13 @@ class BookController extends Controller
         }
         $view = View::make('books.webSearch')->with('books', $books)->render();
         return response()->json(['flag' => $flag, 'view' => $view]);
+    }
+
+    public function getLeased(){
+        $userId = 1;
+        $userBooks = UsersBook::all();
+        $books = Book::all();
+        return view('books.leased', compact('userId','userBooks','books'));
     }
 
 }

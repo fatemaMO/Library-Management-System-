@@ -13,8 +13,8 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-primary navbar-light">
-        <img src="../../../public/img/new_library_logo.gif"  alt="Smiley face" height="55" width="60">
-        
+        <img src="{{ asset('imgs/logo.gif') }}"  alt="Smiley face" height="55" width="60">
+
         <ul class="navbar-nav mr-auto ">
             <li class="navbar-brand">
                 <a class="nav-link" href="/admin/users" style="Color:#FFF">User</a>
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ff9514;  font-weight: bold; font-size:20px;">
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
 
@@ -53,7 +53,7 @@
             </li>
         </ul>
         </div>
- 
+
     </nav>
 
   <div class="container">

@@ -46,6 +46,11 @@
                         </div>
                     </form> 
                     </div>
+                    <div class="col-md-4">
+                    <a href="<?php echo route('orderBooks', ['field' => 'id'])?>"> Order By Latest</a>
+                    <a href="<?php echo route('orderBooks', ['field' => 'rate'])?>">Order By Rate</a>
+
+                    </div>
                 </div>
                 <div class="seacrch_books_contrent"></div>
                 <div class="orginal-search">

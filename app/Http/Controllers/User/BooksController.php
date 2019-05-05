@@ -16,7 +16,7 @@ class BooksController extends Controller
     public function show($id)
     {
         // !this will be the actual userId
-        $userid = 1;
+        $userid = Auth()->user()->id;
         // get the book
         $book = Book::find($id);
         // get available copies
@@ -40,7 +40,8 @@ class BooksController extends Controller
     {   
         $comments = DB::table('comments')
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-            ->where('book_id','=',$id)
+            ->select('users.name','comments.user_id','comments.book_id','comments.dicription','comments.rate','comments.id')
+            ->where('comments.book_id','=',$id)
             ->get();
 
         return $comments;

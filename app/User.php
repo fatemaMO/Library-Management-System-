@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Like;
+use App\UsersBook;
 
 class User extends Authenticatable
 {
@@ -37,6 +39,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //aml
+
+    public function books(){
+        return $this->hasMany('App\Book');
+    }
+
+    public function likes(){
+        return $this->hasMany('App\Like');
+
+    }
     public function role(){
         return $this->belongsTo('App\Role');
     }
@@ -44,5 +56,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function userBooks()
+    {
+        return $this->hasMany('App\UsersBook');
     }
 }

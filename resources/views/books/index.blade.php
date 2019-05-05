@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="right">
-    <a class="btn btn-success" style="margin: 19px;" href="{{ route('books.create')}}" class="btn btn-default"><i class="fas fa-plus"></i>New books</a>
+    <a class="btn btn-success"  href="{{ route('books.create')}}" class="btn btn-default"><i class="fas fa-plus"></i>New books</a>
     </div>
 
 <div class="top">
