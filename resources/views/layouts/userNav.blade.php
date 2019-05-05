@@ -32,6 +32,9 @@
     <nav class="navbar navbar-expand-md bg-primary navbar-light  blue circleBehind">
         <img src="{{ asset('imgs/logo.gif') }}" alt="Smiley face" height="55" width="60">
         <ul class="navbar-nav mr-auto ">
+        <li class="navbar-brand">
+                <a class="nav-link" href="{{route('profile', ['id' => Auth::user()->id ])}}" style="Color:#FFF"> Edit Profile </a>
+            </li>
             <li class="navbar-brand">
                 <a class="nav-link" href="/webBooks" style="Color:#FFF"> Home </a>
             </li>

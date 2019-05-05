@@ -60,6 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/getLeased', 'BookController@getLeased');
     Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
     Route::post('/lease', 'BookController@lease')->name('lease');
+
+    /* user edit details */
+    Route::get('/editProfile/{id}' , 'HomeController@profile')->name('profile');
+    Route::put('updateProfile/{id}', 'HomeController@updateProfile')->name('updateProfile');
     
     //end of user routes
 });
