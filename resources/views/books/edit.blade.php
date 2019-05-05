@@ -50,7 +50,7 @@
     </div>
     <br>
     <select class="browser-default custom-select" name="category_id" value="{{$book->category->name}}">
-                <option selected>{{$book->category->name}}</option>
+                <option value="{{$book->category->id}}" selected>{{$book->category->name}}</option>
                 @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
