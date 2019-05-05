@@ -40,7 +40,7 @@ class HomeController extends Controller
     public function profile($id)
     {
         $user = User::find($id);
-        $roles = Role::all();
+        // $roles = Role::all();
         return view('home.edit',['user'=>$user]);
 
     }
@@ -54,6 +54,7 @@ class HomeController extends Controller
             'username' => $request['username'],
             'phone' => $request['phone'],
             'national_id' => $request['national_id'],
+            'is_active' => true
        
         ]);
         if ($user) {
