@@ -7,7 +7,8 @@ use App\Book;
 use App\Category;
 use App\Comment;
 use Illuminate\Support\Facades\DB;
-
+use App\UsersBook;
+use Carbon\Carbon;
 class BooksController extends Controller
 {
     public function index()
@@ -165,13 +166,18 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    public function destroy( $id)
     {
-        $book = Book::findOrFail($id);
+        $book = Book::find($id);
+        $userBook = UsersBook::where('book_id','=',$id)->get();
+        if ($userBook->count() > 0){
+
+                    return redirect()->route('books.index')->with('status', "you can't delete this book, the book is leased!");
+                }
+
         $book->delete();
-
-        return redirect('admin/books')->with('success', 'Book is successfully deleted');
+        return redirect()->route('books.index');
     }
-
 
 }

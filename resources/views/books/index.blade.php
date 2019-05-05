@@ -1,3 +1,4 @@
+
 @extends('layouts.adminNav')
 
 @section('content')
@@ -47,7 +48,7 @@
                 <form action="{{ route('books.destroy', $book->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i>Delete</button>
+                        <button class="btn btn-danger" type="submit"><i class="fas fa-trash" ></i>Delete</button>
                       </form>
         </td>
 
