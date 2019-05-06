@@ -119,7 +119,6 @@ class BookController extends Controller
     }
 
     public function lease(Request $request){
-        // $userId = Auth()->user()->id;
         $days = $request->days;
         $bookId = $request->bookId;
         $profit = Book::find($bookId)->lease_fees*$days;

@@ -40,7 +40,8 @@
         {{ $favorite->lease_fees }}
       </div>
       <div class="cell" data-title="Active">
-        {{ $favorite->image }}
+        <img style="height:100px"
+                    src="{{URL::to('/')}}/image/{{$favorite->image}}" alt="" />
       </div>
 
     </div>
