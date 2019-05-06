@@ -6,6 +6,7 @@ use App\Book;
 use App\Comment;
 use App\Like;
 use Illuminate\Support\Facades\DB;
+use App\UsersBook;
 
 class BooksController extends Controller
 {
@@ -35,15 +36,20 @@ class BooksController extends Controller
         $avgRate = self::getAvgRate($id);
         $numberOfRates = self::getNumberOfRates($id);
         $isFavourite = self::isFavourite($id);
-        return view('books.show', compact(['isFavourite','avgRate', 'relatedBooks', 'canComment', 'comments', 'book', 'isAvailable', 'availabilityMessage', 'numberOfRates']));
+        $canLease = self::canlease($id);
+        $passedArgs = [
+            'canLease', 'isFavourite', 'avgRate', 'relatedBooks', 'canComment',
+            'comments', 'book', 'isAvailable', 'availabilityMessage', 'numberOfRates'
+        ];
+        return view('books.show', compact($passedArgs));
     }
 
     private function getComments($id)
-    {   
+    {
         $comments = DB::table('comments')
             ->leftJoin('users', 'users.id', '=', 'comments.user_id')
-            ->select('users.name','comments.user_id','comments.book_id','comments.dicription','comments.rate','comments.id')
-            ->where('comments.book_id','=',$id)
+            ->select('users.name', 'comments.user_id', 'comments.book_id', 'comments.dicription', 'comments.rate', 'comments.id')
+            ->where('comments.book_id', '=', $id)
             ->get();
 
         return $comments;
@@ -61,14 +67,16 @@ class BooksController extends Controller
         return true;
     }
 
-    private function getAvgRate($bookId){
+    private function getAvgRate($bookId)
+    {
 
         // $avgRate = DB::table('comments')->where('book_id',$bookId)->avg('rate');
-        $avgRate = Comment::where('book_id',$bookId)->avg('rate');
+        $avgRate = Comment::where('book_id', $bookId)->avg('rate');
         return round($avgRate);
     }
-    private function getNumberOfRates($bookId){
-        $count = Comment::where('book_id',$bookId)->count('rate');
+    private function getNumberOfRates($bookId)
+    {
+        $count = Comment::where('book_id', $bookId)->count('rate');
         // $count = DB::table('comments')->where('book_id',$bookId)->count('rate');
         return $count;
     }
@@ -81,15 +89,29 @@ class BooksController extends Controller
         return $relatedBooks;
     }
 
-    private function isFavourite ($bookId){
+    private function isFavourite($bookId)
+    {
         $userId = Auth()->user()->id;
         $result = Like::where('user_id', $userId)
-        ->where('book_id',$bookId)
-        ->get()
-        ->count();
-        if ($result==0) {
+            ->where('book_id', $bookId)
+            ->get()
+            ->count();
+        if ($result == 0) {
             return false;
         }
         return true;
+    }
+
+    public function canLease($bookId)
+    {
+        $userId = Auth()->user()->id;
+        $result = UsersBook::where('user_id', $userId)
+            ->where('book_id', $bookId)
+            ->get()
+            ->count();
+        if ($result == 0) {
+            return true;
+        }
+        return false;
     }
 }

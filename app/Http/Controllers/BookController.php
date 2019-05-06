@@ -132,4 +132,12 @@ class BookController extends Controller
         DB::table('books')->where('id','=', $bookId)->decrement('available_copies_no', 1);
         return redirect('/books/'. $bookId);
     }
+    public function return(Request $request){
+        $userId = Auth()->user()->id;
+        $bookId = $request->bookId;
+        $leasedBook = UsersBook::where('book_id',$bookId)->where('user_id',$userId);
+        $leasedBook->delete();
+        DB::table('books')->where('id','=', $bookId)->increment('available_copies_no', 1);
+        return redirect('/books/'. $bookId);
+    }
 }

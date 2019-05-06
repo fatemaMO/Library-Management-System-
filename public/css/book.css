@@ -1,5 +1,8 @@
 .borrow {
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
+}
+.return{
+    color: rgb(54, 1, 1) !important;
 }
 .borrow:hover {
     background-color: rgb(6, 177, 148) !important;
@@ -14,6 +17,13 @@
     background-color: rgba(255, 255, 255, 0.466);
     padding: 15px;
     border-radius: 15px;
+}
+.bookDescription{
+    font-size: 22px
+}
+.bookTitle{
+    background: rgba(187, 187, 187, 0.555);
+    border-radius: 20px
 }
 .rate-area {
     float: left;

@@ -72,6 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getLeased', 'BookController@getLeased');
         Route::get('/orderBooks/{field}/','BookController@orderBooks')->name('orderBooks');
         Route::post('/lease', 'BookController@lease')->name('lease');
+        Route::post('/return', 'BookController@return')->name('return');
         Route::get('/editProfile/{id}' , 'HomeController@profile')->name('profile');
         Route::put('updateProfile/{id}', 'HomeController@updateProfile')->name('updateProfile');
     });

@@ -17,14 +17,14 @@
         <div class="col-7 bookArea">
             <div class="row">
                 <div class="col-9">
-                    <h3 class="bookTitle">{{ $book->title }}</h3>
+                    <h2 class="bookTitle">{{ $book->title }}</h2>
                     @if ($numberOfRates > 0)
                     <h4>Average rating :</h4>
                     @for ($i=0;$i<$avgRate;$i++) <span class="star yellow-text text-darken-2">★</span>
                         @endfor
                         @for($i=0;$i<(5-$avgRate);$i++) <span class="star">☆</span>
                             @endfor
-                             @if ($numberOfRates > 1)
+                            @if ($numberOfRates > 1)
                             <span> ({{ $numberOfRates }} users have rated this book)</span>
                             @else
                             <span> (1 user has rated this book)</span>
@@ -35,22 +35,33 @@
                             @if($isAvailable)
                             <p class="availableMsg">{{ $availabilityMessage }}</p>
                             <!-- //! it needs an action -->
+                            @if ($canLease)
                             <form method="post" action="{{ route('lease') }}">
                                 @csrf
                                 <div class="row">
-                                    <div class="col s12">
+                                    <div class="col s12" style="font-size:22px">
                                         Borrow for :
                                         <div class="input-field inline">
-                                            <input id="number_of_days" type="number" class="form-control" name="days"
+                                            <input style="font-size:22px" id="number_of_days" type="number" class="form-control text-center" name="days"
                                                 min="1" max="30" value="1" />
                                         </div>
                                         Days
                                     </div>
                                 </div>
                                 <input type="hidden" value="{{$book->id}}" name="bookId" />
-                                <input type="submit" class="borrow waves-effect waves-light  teal darken-2 btn"
-                                    value="Borrow" />
+                                <button type="submit" class="borrow waves-effect waves-light  green lighten-2 btn"
+                                    style="margin-left:23%;width:90%"> Lease </button>
                             </form>
+                            @else
+                            <div class="alert alert-danger" style="font-size:22px;width:135%">This book is in your
+                                leased books</div>
+                            <form method="post" action="{{ route('return') }}">
+                                @csrf
+                                <input type="hidden" value="{{$book->id}}" name="bookId" />
+                                <button type="submit" class="return waves-effect waves-light cyan lighten-3 btn"
+                                     style="margin-left:23%;width:90%">Return</button>
+                            </form>
+                            @endif
                             @else
                             <p class="unavailableMsg">No books are available</p>
                             @endif
@@ -146,8 +157,8 @@
     <div class="row">
         @foreach ($relatedBooks as $related)
         <div class="col-2 text-center">
-            <a href="/books/{{ $related->id }}"><img style="width:100%;height:190px" src="{{URL::to('/')}}/image/{{$related->image}}"
-                    alt="" /></a>
+            <a href="/books/{{ $related->id }}"><img style="width:100%;height:190px"
+                    src="{{URL::to('/')}}/image/{{$related->image}}" alt="" /></a>
 
             <h3>{{ $related->title }}</h3>
             @if($related->available_copies_no >1)
@@ -163,7 +174,7 @@
     </div>
 </div>
 @endsection
- @section('js')
+@section('js')
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -182,7 +193,7 @@
 </script>
 
 <script>
-        $(function() {
+    $(function() {
             $(".heart").on("click", function() {
                 let isLike
                 $(this).toggleClass("is-active");
@@ -211,5 +222,3 @@
 
 </script>
 @endsection
-
-
