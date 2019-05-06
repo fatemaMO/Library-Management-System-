@@ -8,7 +8,9 @@
 
 @section('content')
 
-    <h1>MY FAVORITES</h1>
+<div class="cover-img">
+  <div class="bg-cover">
+    <h2>MY FAVORITES</h1>
 
     <div class="wrapper">
   
@@ -17,9 +19,10 @@
     
     <div class="row header blue">
       <div class="cell">Book Title</div>
-      <div class="cell">Auther</div>
-      <div class="cell">Image</div>
       <div class="cell">Description</div>
+      <div class="cell">Auther</div>
+      <div class="cell">Lease fees</div>
+      <div class="cell">Book Image</div>
     </div>
     
     <div class="row">
@@ -36,10 +39,16 @@
       <div class="cell" data-title="Active">
         {{ $favorite->lease_fees }}
       </div>
+      <div class="cell" data-title="Active">
+        {{ $favorite->image }}
+      </div>
+
     </div>
     
     @endforeach
   </div>
   
+</div>
+</div>
 </div>
 @endsection

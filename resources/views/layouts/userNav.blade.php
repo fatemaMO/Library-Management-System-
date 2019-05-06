@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md bg-primary navbar-light  blue circleBehind">
+    <nav class="navbar navbar-expand-md bg-primary navbar-light fav-nav" style="background-color:#3490dc!important">
         <img src="{{ asset('imgs/logo.gif') }}" alt="Smiley face" height="55" width="60">
         <ul class="navbar-nav mr-auto ">
         <li class="navbar-brand">
@@ -77,7 +77,7 @@
         </div>
 
     </nav>
-    <main class="py-4">
+    <main class="py-4 fav-table" style= "">
         <!-- <div class="container"> -->
         @yield('content')
         <!-- </div> -->

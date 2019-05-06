@@ -23,9 +23,11 @@
     max-width: 800px;
   }*/
   
-  h1{
-      color: aliceblue;
+  h2{
+      color: #f28f00;
       text-align: center;
+      padding-top: 50px;
+      padding-bottom: 20px;
   }
   
   .table {

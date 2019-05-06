@@ -47,11 +47,6 @@ div.container a
     cursor: pointer;
 }
 
-.blue
-{
-    background: #2196f3;
-}
-
 /* Circle behind */
 div.circleBehind a:before, div.circleBehind a:after
 {
@@ -87,5 +82,30 @@ div.circleBehind a:hover:after
     opacity: 1;
     transform: translateX(-50%) translateY(-50%) scale(1.3);
 }
+
+/************************** start favorite style ************************/
+.cover-img{
+    background-image: url('../imgs/bg-cover.jpg');
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    height: 100vh;    
+    margin-top: -24px;
+}
+.bg-cover{
+    background-color: #757575db;
+    height: 100vh;
+}
+.wrapper-table{
+    max-height: 400px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.fav-table{
+    /*height: 500px;*/
+}
+/************************** end favorite style ************************/
 
 /************************** Aml ************************/
