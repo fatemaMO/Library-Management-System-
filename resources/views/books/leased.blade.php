@@ -1,7 +1,8 @@
 @extends('layouts.userNav')
 
 @section('content')
-
+<div class="cover-img">
+  <div class="bg-cover">
         @foreach ($userBooks as $userBook)
             @if($userBook->user_id == $userId)
                 @foreach ($books as $book)
@@ -17,21 +18,22 @@
                         <br> --}}
                         {{-- <div class="card-columns"> --}}
 
-                        <div class="card" style="width:400px">
+                        <div class="card" style="width:400px; background-color: #ffffffbd;">
                                 <img class="card-img-top"  src="{{URL::to('/')}}/image/{{$book->image}}" alt="Card image cap" height="195" width="160">
 
                                 <div class="card-body">
-                                  <h3 class="card-title">Title:{{$book->title}}</h3>
-                                  <h4 class="card-title">Author:{{$book->auther}}</h4>
-                                  <h4 class="card-title">No.Of Days:{{$userBook->days}}</h4>
-                                  <h4 class="card-title">{{$book->rate}}</h4>
-                                  <p class="card-text">Description:{{$book->description}}</p>
+                                  <h3 class="card-title"><span class="card-tit-leased">Title: </span>{{$book->title}}</h3>
+                                  <h4 class="card-title"><span class="card-tit-leased">Author: </span>{{$book->auther}}</h4>
+                                  <h4 class="card-title"><span class="card-tit-leased">No.Of Days: </span>{{$userBook->days}}</h4>
+                                  <h4 class="card-title"><span class="card-tit-leased">Rate: </span>{{$book->rate}}</h4>
+                                  <h4 class="card-title"><span class="card-tit-leased">Description: </span>{{$book->description}}</h4>
                                 </div>
-                                </div>
-
-                              </div>
+                        </div>
+                    </div>
                     @endif
                 @endforeach
             @endif
         @endforeach
+</div>
+<div>
 @endsection

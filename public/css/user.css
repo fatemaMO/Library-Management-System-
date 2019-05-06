@@ -2,6 +2,7 @@
 html, body
 {
     margin: 0px;
+    overflow-x: hidden;
 }
 
 header, footer
@@ -11,6 +12,7 @@ header, footer
 	/*padding: 5em 3em;*/
 	text-align: center;
     /*background: #555;*/
+    margin-top: -21px;
 }
 
 header img{
@@ -24,7 +26,8 @@ header span
 
 footer span
 {
-  color: #AAA;
+  color: #f18e00;
+  font-weight: bold;
 }
 
 div.container
@@ -107,5 +110,31 @@ div.circleBehind a:hover:after
     /*height: 500px;*/
 }
 /************************** end favorite style ************************/
+
+/************************** start my books page style ************************/
+.card-deck {
+    flex-flow: row wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-top: 30px;
+}
+.card-tit-leased{
+    color: #008cff;
+}
+/************************** end my books page style ************************/
+
+
+/************************** start home page style ************************/
+.list-cat{
+    padding-top: 50px;
+}
+.search-btn{
+    background-color: #f28f00b5;
+    color: white;
+    font-weight: bold;
+}
+/************************** end home page style ************************/
+
+
 
 /************************** Aml ************************/
