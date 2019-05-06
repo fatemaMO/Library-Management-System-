@@ -209,31 +209,6 @@
             });
         });
 
-    //     $('.like').on('click',function(event){
-    //      event.preventDefault();
-    //     // bookId = event.target.parentNode.parentNode.dataset['bookid'];
-    //     //  bookId = parseInt($("#bookIDcUSTOM").val());
-    //     // Instead of getting the book id from DOM
-    //      bookId = {{ $book->id }};
-    //      let isLike = event.target.previousElementSibling == null;
-    //      $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
-    //      $.ajax({
-    //          type: 'POST',
-    //          url: '/like',
-    //          data: {isLike: isLike, bookId: bookId}
-    //      })
-    //          .done(function(){
-    //             event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this book' : 'favorite' : event.target.innerText == 'unfavorite' ? 'You don\'t like this book' : 'unfavorite';
-    //             if (isLike) {
-    //                 event.target.nextElementSibling.innerText = 'unfavorite';
-    //             } else {
-    //                 event.target.previousElementSibling.innerText = 'favorite';
-    //             }            });
-    //     });
 </script>
 @endsection
 

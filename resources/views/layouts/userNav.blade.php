@@ -87,12 +87,11 @@
         <span>Maktabty(C) All rights Reserved</span>
     </footer>
 
-    <!-- @yield('js') -->
+     @yield('js')
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<!-- <script type="text/javascript" src="{{ asset('js/ajax.js') }}">
-</script> -->
+
 <script type="text/javascript">
 
     // var bookSearch = {{ route('bookSearch') }};
