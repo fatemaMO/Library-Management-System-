@@ -1,6 +1,8 @@
 @extends('layouts.adminNav')
 
 @section('content')
+
+
 <div class="top">
     <div class="card uper">
   <div class="card-header">

@@ -2,6 +2,10 @@
 
 @section('content')
 
+<div class="cover-img">
+  <div class="bg-cover">
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -98,5 +102,8 @@
             </div>
         </div>
     </div>
+</div>
+
+</div>
 </div>
 @endsection
