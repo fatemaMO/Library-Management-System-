@@ -42,13 +42,24 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+//         Username: g5MJI2DZch
+
+// Database name: g5MJI2DZch
+
+// Password: q7qTkcSbJj
+
+// Server: remotemysql.com
+
+// Port: 3306
+
+
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'remotemysql.com'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'libraryiti'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
+            'database' => env('DB_DATABASE', 'g5MJI2DZch'),
+            'username' => env('DB_USERNAME', 'g5MJI2DZch'),
+            'password' => env('DB_PASSWORD', 'q7qTkcSbJj'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
