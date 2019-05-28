@@ -42,15 +42,6 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-//         Username: g5MJI2DZch
-
-// Database name: g5MJI2DZch
-
-// Password: q7qTkcSbJj
-
-// Server: remotemysql.com
-
-// Port: 3306
 
 
         'mysql' => [
