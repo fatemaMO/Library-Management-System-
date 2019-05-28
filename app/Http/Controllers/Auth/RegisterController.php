@@ -60,7 +60,7 @@ class RegisterController extends Controller
         ]);
     }
     /**
-    * @return view:registrationForm 
+    * @return view:registrationForm
     */
 
     public function showRegistrationForm()
@@ -76,14 +76,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'username' => $data['username'],
             'phone' => $data['phone'],
             'national_id' => $data['national_id'],
-            'role_id' => $data['role_id'],
+            'type' => $data['type'],
             'is_active' => true,
             'password' => Hash::make($data['password']),
         ]);

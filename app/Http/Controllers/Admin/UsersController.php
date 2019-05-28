@@ -63,7 +63,7 @@ class UsersController extends Controller
         ]);
         if ($user) {
             return redirect("/admin/users/$type")->with('success', 'user created successfully');
-            
+
         }
 
         return Redirect::back()->withInput();
@@ -89,12 +89,11 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::all();
-        return view('admin.users.edit',['user'=>$user, 'roles' => $roles]);
+        return view('admin.users.edit',['user'=>$user]);
 
     }
 
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -115,7 +114,7 @@ class UsersController extends Controller
             'national_id' => $request['national_id'],
             'type' => $type,
             'is_active' => true,
-       
+
         ]);
         if ($user) {
             return redirect("/admin/users/$type")->with('success', 'user updated successfully');

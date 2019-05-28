@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('phone') }}</label>
@@ -90,13 +90,10 @@
                             <label for="role_id" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select id="role_id"  class="form-control{{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="role_id" >
-                                    <option value="">Please choose a role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{$role->id}}" @if($user->role_id == $role-> id) selected @endif>{{$role->name}}</option>
-
-                                    @endforeach
-                                </select>
+                                <select id="type"  class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" value="{{ old('type') }}">
+                                    <option value="">Please choose a type</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="user">User</option>
 
                                 @if ($errors->has('role_id'))
                                     <span class="invalid-feedback" role="alert">
